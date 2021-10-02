@@ -46,8 +46,11 @@ public class Character : MonoBehaviour
 
     public virtual void Update()
     {
-        mAnimator.SetInteger("Emotion", (int)mEmotion);
-        mAnimator.SetBool("InAir", mInAir);
+        // TODO - add animator to cat
+        if (mAnimator != null) {
+            mAnimator.SetInteger("Emotion", (int)mEmotion);
+            mAnimator.SetBool("InAir", mInAir);
+        }
     }
 
     public virtual void FixedUpdate()

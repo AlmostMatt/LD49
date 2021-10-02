@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7217624579564069879}
   - component: {fileID: 8557301111964269065}
   - component: {fileID: 6780265828145918302}
-  - component: {fileID: 3446240043131091879}
   - component: {fileID: 304848038227077375}
   m_Layer: 0
   m_Name: EmotionEffect
@@ -81,20 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3446240043131091879
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2841208033597391921}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &304848038227077375
 MonoBehaviour:
   m_ObjectHideFlags: 0
