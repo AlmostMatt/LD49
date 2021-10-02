@@ -33,4 +33,15 @@ public static class EmotionExtensions
                 return 1f;
         }
     }
+
+    public static string GetMoodTag(this Emotion e)
+    {
+        switch(e)
+        {
+            case Emotion.ANGRY:
+                return "AngryEnvFx";
+            default:
+                return null;
+        }
+    }
 }

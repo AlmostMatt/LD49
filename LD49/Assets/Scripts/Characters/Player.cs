@@ -8,6 +8,8 @@ public class Player : Character
     public float happyJumpTimer = 1f;
     private float mJumpCooldown = 0f;
 
+    private GameObject mMoodEnvironmentEffects;
+
     public override void Update()
     {
         base.Update();
@@ -58,6 +60,23 @@ public class Player : Character
         if (mEmotion == Emotion.JOYFUL)
         {
             mJumpCooldown = happyJumpTimer;
+        }
+
+        // environmental vfx
+        if (mMoodEnvironmentEffects != null)
+        {
+            mMoodEnvironmentEffects.SetActive(false);
+        }
+
+        string moodTag = mEmotion.GetMoodTag();
+        if (moodTag != null)
+        {
+            GameObject rootObj = GameObject.FindWithTag(moodTag);
+            if (rootObj != null)
+            {
+                mMoodEnvironmentEffects = rootObj.transform.GetChild(0).gameObject;
+                mMoodEnvironmentEffects.SetActive(true);
+            }
         }
     }
 
