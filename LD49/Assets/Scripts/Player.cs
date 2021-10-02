@@ -178,9 +178,19 @@ public class Player : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
+        BreakIfBreakableAndAngry(collision.gameObject);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        BreakIfBreakableAndAngry(other.gameObject);
+    }
+
+    private void BreakIfBreakableAndAngry(GameObject other)
+    {
         if (mEmotion == Emotion.ANGRY)
         {
-            Breakable breakable = collision.gameObject.GetComponent<Breakable>();
+            Breakable breakable = other.GetComponent<Breakable>();
             if (breakable != null)
             {
                 breakable.Break();

@@ -14,6 +14,7 @@ public class Breakable : MonoBehaviour
         }
         mIsBroken = true;
         // TODO - make objects shatter or spawn particles.
+        // https://answers.unity.com/questions/1006318/script-to-break-mesh-into-smaller-pieces.html
         // TODO - destroy the gameobject after a delay, or change layers
         foreach (Collider coll in GetComponentsInChildren<Collider>())
         {
