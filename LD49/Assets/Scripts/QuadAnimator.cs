@@ -32,7 +32,7 @@ public class QuadAnimator : MonoBehaviour
         mPrevNumSprites = numSprites;
     }
 
-    void LateUpdate() 
+    void LateUpdate()
     {
         // if the material changes, unity seems to take one frame before it actually uses the new one
         // but it immediately uses any changes to the uvs.
