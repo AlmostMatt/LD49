@@ -144,8 +144,7 @@ public class Character : MonoBehaviour
 
     private float GetAccel()
     {
-        // todo: emotion check
-        return normalMoveAccel;
+        return normalMoveAccel * mEmotion.GetAccelModifier();
     }
 
     private void ChangeDirection(FacingDirection newDir)

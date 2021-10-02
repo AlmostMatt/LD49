@@ -25,14 +25,23 @@ public static class EmotionExtensions
         }
     }
 
-    public static float GetAccel(this Emotion e)
+    public static float GetAccelModifier(this Emotion e)
     {
         switch(e)
         {
-            case Emotion.JOYFUL:
-                return 25f;
             default:
-                return 50f;
+                return 1f;
+        }
+    }
+
+    public static string GetMoodTag(this Emotion e)
+    {
+        switch(e)
+        {
+            case Emotion.ANGRY:
+                return "AngryEnvFx";
+            default:
+                return null;
         }
     }
 }
