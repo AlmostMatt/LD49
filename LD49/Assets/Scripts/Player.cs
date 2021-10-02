@@ -34,14 +34,14 @@ public class Player : MonoBehaviour
     private float mJumpCooldown = 0f;
 
     private float mCapsuleCenterToFeet;
+    private CapsuleCollider mCapsule;
 
     // Start is called before the first frame update
     void Start()
     {
         mRigidbody = GetComponent<Rigidbody>();
 
-        CapsuleCollider capsule = GetComponent<CapsuleCollider>();
-        mCapsuleCenterToFeet = capsule.height * 0.5f;
+        mCapsule = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -56,22 +56,12 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         // in air check
-        bool prev = mInAir;
         mInAir = true;
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, mCapsuleCenterToFeet)) // todo: capsule sweep?
+        float capsuleHalfHeight = (mCapsule.height * 0.5f); // height includes radius?
+        if (Physics.SphereCast(transform.position, mCapsule.radius, Vector3.down, out hitInfo, capsuleHalfHeight + 0.01f))
         {
-            if (prev)
-            {
-                Debug.Log("on ground");
-            }
-            
             mInAir = false;
-        }
-        else if (!prev)
-        {
-            Debug.Log("in air");
-            Debug.Break();
         }
 
         if (mEmotion == Emotion.NEUTRAL)
