@@ -75,7 +75,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected void DoDirectionalMovement(Vector2 inputVector)
+    protected void DoDirectionalMovement(Vector2 inputVector, bool instantAcceleration=false)
     {
         float horz = inputVector.x;
         float vert = inputVector.y;
@@ -125,7 +125,8 @@ public class Character : MonoBehaviour
             if (deltaV.magnitude > 0)
             {
                 float accelNeeded = deltaV.magnitude / Time.fixedDeltaTime;
-                Vector3 movementForce = deltaV.normalized * Mathf.Min(accelNeeded, GetAccel());
+                float actualAccel = instantAcceleration ? accelNeeded : Mathf.Min(accelNeeded, GetAccel());
+                Vector3 movementForce = deltaV.normalized * actualAccel;
                 mRigidbody.AddForce(movementForce);
             }
         }
