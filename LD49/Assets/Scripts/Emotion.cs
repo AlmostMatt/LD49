@@ -38,6 +38,8 @@ public static class EmotionExtensions
     {
         switch(e)
         {
+            case Emotion.JOYFUL:
+                return "JoyfulEnvFx";
             case Emotion.ANGRY:
                 return "AngryEnvFx";
             default:
