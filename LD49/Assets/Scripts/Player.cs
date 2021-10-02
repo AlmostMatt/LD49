@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     private CapsuleCollider mCapsule;
 
     private Animator mAnimator;
+    private QuadAnimator mQuadAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
         mRigidbody = GetComponent<Rigidbody>();
         mCapsule = GetComponent<CapsuleCollider>();
         mAnimator = GetComponent<Animator>();
+        mQuadAnimator = GetComponentInChildren<QuadAnimator>();
     }
 
     // Update is called once per frame
@@ -173,6 +175,8 @@ public class Player : MonoBehaviour
     {
         mFacingDirection = newDir;
         // transform.rotation = Quaternion.Euler(FACING_VECTORS[(int)newDir]); // not needed? if movement is not relative to facing direction
+
+        mQuadAnimator.flipX = mFacingDirection == FacingDirection.WEST;
     }
 
     public void SetEmotion(Emotion e)

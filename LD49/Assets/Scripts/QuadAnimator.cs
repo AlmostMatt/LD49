@@ -8,6 +8,8 @@ public class QuadAnimator : MonoBehaviour
 
     [HideInInspector]
     public int spriteIdx = 0;
+    [HideInInspector]
+    public bool flipX = false;
 
     private int mPrevNumSprites;
     private int mPrevSpriteIdx;
@@ -38,8 +40,17 @@ public class QuadAnimator : MonoBehaviour
         if ((spriteIdx != mPrevSpriteIdx) || (numSprites != mPrevNumSprites))
         {
             spriteIdx = Mathf.Min(spriteIdx, numSprites - 1);
-            uvs[0].x = uvs[2].x = (float)spriteIdx / numSprites;
-            uvs[1].x = uvs[3].x = uvs[0].x + (1f / numSprites);
+            float leftU = (float)spriteIdx / numSprites;
+            float rightU = leftU + (1f / numSprites);
+            if (flipX)
+            {
+                float temp = leftU;
+                leftU = rightU;
+                rightU = temp;
+            }
+
+            uvs[0].x = uvs[2].x = leftU;
+            uvs[1].x = uvs[3].x = rightU;
             mMesh.SetUVs(0, uvs);
             mPrevSpriteIdx = spriteIdx;
             mPrevNumSprites = numSprites;
