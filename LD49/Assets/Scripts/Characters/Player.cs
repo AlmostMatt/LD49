@@ -43,7 +43,6 @@ public class Player : Character
                 mAlternateFoot = !mAlternateFoot;
 
                 DoDirectionalMovement(inputVector, true);
-                Debug.Log("jump V - " + mRigidbody.velocity.ToString());
             }
         }
     }
