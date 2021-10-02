@@ -21,11 +21,11 @@ public class Player : Character
     {
         base.FixedUpdate();
         Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal") , Input.GetAxis("Vertical"));
-        if (mEmotion != Emotion.HAPPY)
+        if (mEmotion != Emotion.JOYFUL)
         {
             DoDirectionalMovement(inputVector);
         }
-        else if (mEmotion == Emotion.HAPPY)
+        else if (mEmotion == Emotion.JOYFUL)
         {
             // totally different movement if happy and jumping
             if (CanJump())
@@ -42,7 +42,7 @@ public class Player : Character
 
     private bool ShouldJump()
     {
-        return mEmotion == Emotion.HAPPY || Input.GetButton("Jump"); // TODO - remove the input button
+        return mEmotion == Emotion.JOYFUL || Input.GetButton("Jump"); // TODO - remove the input button
     }
 
     private bool CanJump()
@@ -53,7 +53,7 @@ public class Player : Character
     public override void SetEmotion(Emotion e)
     {
         base.SetEmotion(e);
-        if (mEmotion == Emotion.HAPPY)
+        if (mEmotion == Emotion.JOYFUL)
         {
             mJumpCooldown = happyJumpTimer;
         }

@@ -5,8 +5,10 @@ using UnityEngine;
 public enum Emotion
 {
     NEUTRAL,
-    HAPPY,
-    ANGRY
+    JOYFUL,
+    ANGRY,
+    AFRAID,
+    SMITTEN,
 }
 
 
@@ -16,7 +18,7 @@ public static class EmotionExtensions
     {
         switch(e)
         {
-            case Emotion.HAPPY:
+            case Emotion.JOYFUL:
                 return 2f;
             default:
                 return 3f;
@@ -27,7 +29,7 @@ public static class EmotionExtensions
     {
         switch(e)
         {
-            case Emotion.HAPPY:
+            case Emotion.JOYFUL:
                 return 25f;
             default:
                 return 50f;

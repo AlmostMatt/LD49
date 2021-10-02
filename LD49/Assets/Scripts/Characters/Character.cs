@@ -148,6 +148,10 @@ public class Character : MonoBehaviour
     public virtual void SetEmotion(Emotion e)
     {
         mEmotion = e;
+        foreach (EmotionEffect effect in GetComponentsInChildren<EmotionEffect>())
+        {
+            effect.SetEmotion(e);
+        }
     }
 
 }
