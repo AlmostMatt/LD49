@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
         else if (!prev)
         {
             Debug.Log("in air");
-            Debug.Break();
+            // Debug.Break();
         }
 
         if (mEmotion == Emotion.NEUTRAL)
