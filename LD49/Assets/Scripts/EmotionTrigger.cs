@@ -5,6 +5,7 @@ using UnityEngine;
 public class EmotionTrigger : MonoBehaviour
 {
     public Emotion emotion;
+    public bool oneTimeUse = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,6 +14,11 @@ public class EmotionTrigger : MonoBehaviour
         if (player != null)
         {
             player.SetEmotion(emotion);
+
+            if (oneTimeUse)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
