@@ -17,13 +17,12 @@ Shader "Projector/Multiply" {
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
-			#pragma multi_compile_fog
+
 			#include "UnityCG.cginc"
 			
 			struct v2f {
 				float4 uvShadow : TEXCOORD0;
 				float4 uvFalloff : TEXCOORD1;
-				UNITY_FOG_COORDS(2)
 				float4 pos : SV_POSITION;
 			};
 			
@@ -36,7 +35,6 @@ Shader "Projector/Multiply" {
 				o.pos = UnityObjectToClipPos(vertex);
 				o.uvShadow = mul (unity_Projector, vertex);
 				o.uvFalloff = mul (unity_ProjectorClip, vertex);
-				UNITY_TRANSFER_FOG(o,o.pos);
 				return o;
 			}
 			
@@ -51,7 +49,6 @@ Shader "Projector/Multiply" {
 				fixed4 texF = tex2Dproj (_FalloffTex, UNITY_PROJ_COORD(i.uvFalloff));
 				fixed4 res = lerp(fixed4(1,1,1,0), texS, texF.a);
 
-				UNITY_APPLY_FOG_COLOR(i.fogCoord, res, fixed4(1,1,1,1));
 				return res;
 			}
 			ENDCG

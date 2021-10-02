@@ -1947,45 +1947,45 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1343460231131339968, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.309
-      objectReference: {fileID: 0}
-    - target: {fileID: 1343460231131339968, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.004
-      objectReference: {fileID: 0}
-    - target: {fileID: 1343460231131339968, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1343460231131339968, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1343460231131339968, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 1343460231136481826, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_FieldOfView
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1343460231136481826, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_IgnoreLayers.m_Bits
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 5799431823130715851, guid: 4945387d2516a224c9141421096aceac,
         type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521743143964753254, guid: 4945387d2516a224c9141421096aceac,
+        type: 3}
+      propertyPath: m_FieldOfView
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521743143964753254, guid: 4945387d2516a224c9141421096aceac,
+        type: 3}
+      propertyPath: m_Orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521743143964753254, guid: 4945387d2516a224c9141421096aceac,
+        type: 3}
+      propertyPath: m_IgnoreLayers.m_Bits
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521743143973958532, guid: 4945387d2516a224c9141421096aceac,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.997
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521743143973958532, guid: 4945387d2516a224c9141421096aceac,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521743143973958532, guid: 4945387d2516a224c9141421096aceac,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521743143973958532, guid: 4945387d2516a224c9141421096aceac,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 6686201163283154084, guid: 4945387d2516a224c9141421096aceac,
         type: 3}
@@ -2005,12 +2005,12 @@ PrefabInstance:
     - target: {fileID: 6686201163283154107, guid: 4945387d2516a224c9141421096aceac,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6686201163283154107, guid: 4945387d2516a224c9141421096aceac,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.746
+      value: -1.406
       objectReference: {fileID: 0}
     - target: {fileID: 6686201163283154107, guid: 4945387d2516a224c9141421096aceac,
         type: 3}
@@ -3505,11 +3505,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2401370624291019141, guid: 1bc2347d1ef792d47a8e369f58abd67a,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 2401370625028023513, guid: 1bc2347d1ef792d47a8e369f58abd67a,
         type: 3}
       propertyPath: m_RootOrder
@@ -3569,11 +3564,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AngryTrigger
-      objectReference: {fileID: 0}
-    - target: {fileID: 2401370625028023515, guid: 1bc2347d1ef792d47a8e369f58abd67a,
-        type: 3}
-      propertyPath: emotion
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bc2347d1ef792d47a8e369f58abd67a, type: 3}
