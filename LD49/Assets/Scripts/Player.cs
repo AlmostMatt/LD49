@@ -56,11 +56,22 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         // in air check
+        bool prev = mInAir;
         mInAir = true;
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, mCapsuleCenterToFeet))
+        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, mCapsuleCenterToFeet)) // todo: capsule sweep?
         {
+            if (prev)
+            {
+                Debug.Log("on ground");
+            }
+            
             mInAir = false;
+        }
+        else if (!prev)
+        {
+            Debug.Log("in air");
+            Debug.Break();
         }
 
         if (mEmotion == Emotion.NEUTRAL)
