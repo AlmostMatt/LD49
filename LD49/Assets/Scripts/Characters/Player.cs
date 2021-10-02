@@ -8,6 +8,7 @@ public class Player : Character
     // Player jumps when joyful
     public float happyJumpTimer = 1f;
     private float mJumpCooldown = 0f;
+    private bool mAlternateFoot = false;
 
     private GameObject mMoodEnvironmentEffects;
 
@@ -19,6 +20,8 @@ public class Player : Character
         {
             mJumpCooldown -= Time.deltaTime;
         }
+
+        mAnimator.SetBool("AlternateFoot", mAlternateFoot);
     }
 
     private void CheckEmotionTriggers()
@@ -64,6 +67,7 @@ public class Player : Character
                 mRigidbody.velocity = Vector3.zero;
                 mRigidbody.AddForce(jumpForce);
                 mJumpCooldown = happyJumpTimer;
+                mAlternateFoot = !mAlternateFoot;
 
                 DoDirectionalMovement(inputVector, true);
             }
@@ -72,7 +76,7 @@ public class Player : Character
 
     private bool ShouldJump()
     {
-        return mEmotion == Emotion.JOYFUL || Input.GetButton("Jump"); // TODO - remove the input button
+        return mEmotion == Emotion.JOYFUL;
     }
 
     private bool CanJump()
