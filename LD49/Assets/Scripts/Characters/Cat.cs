@@ -14,29 +14,34 @@ public class Cat : Character
         Vector3 directionVector = Vector3.zero;
         Food nearbyFood = ObjectInRangeOrNull<Food>(visionRadius);
         Player nearbyPlayer = ObjectInRangeOrNull<Player>(visionRadius);
-        if (nearbyFood != null)
+        // Angry player - run away!
+        if (nearbyPlayer != null && nearbyPlayer.GetEmotion() == Emotion.ANGRY) {
+            // Run away!
+            SetEmotion(Emotion.AFRAID);
+            directionVector = transform.position - nearbyPlayer.transform.position;
+        }
+        else if (nearbyFood != null)
         {
             // Go get the food!
             SetEmotion(Emotion.SMITTEN);
             directionVector = nearbyFood.transform.position - transform.position;
-        }
-        // Food is more important than player (for now)
-        if (nearbyFood == null && nearbyPlayer != null)
-        {
-            if (nearbyPlayer.GetEmotion() == Emotion.ANGRY)
+            // Stop if close enough
+            if (directionVector.sqrMagnitude < 0.1f)
             {
-                // Run away!
-                SetEmotion(Emotion.AFRAID);
-                directionVector = transform.position - nearbyPlayer.transform.position;
-            } else
-            {
-                // Chase!
-                SetEmotion(Emotion.ANGRY);
-                directionVector = nearbyPlayer.transform.position - transform.position;
+                directionVector = Vector3.zero;
             }
-        }
-        if (nearbyFood == null && nearbyPlayer == null)
+        } else if (nearbyPlayer != null) {
+            // Chase!
+            SetEmotion(Emotion.ANGRY);
+            directionVector = nearbyPlayer.transform.position - transform.position;
+            // Stop if close enough
+            if (directionVector.sqrMagnitude < 0.1f)
+            {
+                directionVector = Vector3.zero;
+            }
+        } else
         {
+            // Cat resets to neutral when nothing is happening.
             SetEmotion(Emotion.NEUTRAL);
         }
         if (mEmotion != Emotion.JOYFUL)
