@@ -2,15 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Character : MonoBehaviour
 {
-    public float normalMoveMaxSpeed = 5f;
-    public float normalMoveAccel = 50f;
-    public float jumpAccel = 10f;
-
-    public float happyJumpTimer = 1f;
-
-    enum FacingDirection
+    public enum FacingDirection
     {
         NORTH,
         EAST,
@@ -18,7 +12,7 @@ public class Player : MonoBehaviour
         WEST
     }
 
-    private Vector3[] FACING_VECTORS =
+    protected Vector3[] FACING_VECTORS =
     {
         Vector3.forward,
         Vector3.right,
@@ -26,16 +20,18 @@ public class Player : MonoBehaviour
         Vector3.left
     };
 
-    private Emotion mEmotion = Emotion.NEUTRAL;
+    public float normalMoveMaxSpeed = 5f;
+    public float normalMoveAccel = 50f;
+    public float jumpAccel = 10f;
 
-    private FacingDirection mFacingDirection = FacingDirection.EAST;
-    private Rigidbody mRigidbody;
-    private bool mInAir = false;
-    private float mJumpCooldown = 0f;
+    protected Emotion mEmotion = Emotion.NEUTRAL;
+    protected Rigidbody mRigidbody;
+    protected bool mInAir = false;
 
     private float mCapsuleCenterToFeet;
     private CapsuleCollider mCapsule;
 
+    private FacingDirection mFacingDirection = FacingDirection.EAST;
     private Animator mAnimator;
     private QuadAnimator mQuadAnimator;
 
@@ -48,16 +44,7 @@ public class Player : MonoBehaviour
         mQuadAnimator = GetComponentInChildren<QuadAnimator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (mJumpCooldown > 0f)
-        {
-            mJumpCooldown -= Time.deltaTime;
-        }
-    }
-
-    void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         // in air check
         mInAir = true;
@@ -67,33 +54,16 @@ public class Player : MonoBehaviour
         {
             mInAir = false;
         }
-
-        if (mEmotion != Emotion.HAPPY)
-        {
-            DoDirectionalMovement();
-        }
-        else if (mEmotion == Emotion.HAPPY)
-        {
-            // totally different movement if happy and jumping
-            if (CanJump())
-            {
-                Vector3 jumpForce = Vector3.up * jumpAccel;
-                mRigidbody.velocity = Vector3.zero;
-                mRigidbody.AddForce(jumpForce);
-                mJumpCooldown = happyJumpTimer;
-
-                DoDirectionalMovement();
-            }
-        }
-
+        
         mAnimator.SetFloat("Speed", mRigidbody.velocity.magnitude);
         mQuadAnimator.flipX = mRigidbody.velocity.x < 0;
     }
 
-    private void DoDirectionalMovement()
+    protected void DoDirectionalMovement(Vector2 inputVector)
     {
-        float horz = Input.GetAxis("Horizontal");
-        float vert = Input.GetAxis("Vertical");
+        Debug.Log("moving - " + inputVector.ToString());
+        float horz = inputVector.x;
+        float vert = inputVector.y;
 
         FacingDirection desiredFacingDirection = mFacingDirection;
         if (horz != 0)
@@ -146,16 +116,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private bool ShouldJump()
-    {
-        return mEmotion == Emotion.HAPPY || Input.GetButton("Jump"); // TODO - remove the input button
-    }
-
-    private bool CanJump()
-    {
-        return !mInAir && mRigidbody.velocity.y <= 0f && mJumpCooldown <= 0f;
-    }
-
     private bool CanChangeDirection()
     {
         return !mInAir;
@@ -178,35 +138,9 @@ public class Player : MonoBehaviour
         // transform.rotation = Quaternion.Euler(FACING_VECTORS[(int)newDir]); // not needed? if movement is not relative to facing direction        
     }
 
-    public void SetEmotion(Emotion e)
+    public virtual void SetEmotion(Emotion e)
     {
         mEmotion = e;
-
-        if (mEmotion == Emotion.HAPPY)
-        {
-            mJumpCooldown = happyJumpTimer;
-        }
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        BreakIfBreakableAndAngry(collision.gameObject);
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        BreakIfBreakableAndAngry(other.gameObject);
-    }
-
-    private void BreakIfBreakableAndAngry(GameObject other)
-    {
-        if (mEmotion == Emotion.ANGRY)
-        {
-            Breakable breakable = other.GetComponent<Breakable>();
-            if (breakable != null)
-            {
-                breakable.Break();
-            }
-        }
-    }
 }
