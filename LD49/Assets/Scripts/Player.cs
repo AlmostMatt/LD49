@@ -24,9 +24,10 @@ public class Player : MonoBehaviour
         Vector3.left
     };
 
+    private Emotion mEmotion = Emotion.NEUTRAL;
+
     private FacingDirection mFacingDirection = FacingDirection.EAST;
     private Rigidbody mRigidbody;
-
     private bool mInAir = false;
 
     // Start is called before the first frame update
@@ -104,13 +105,16 @@ public class Player : MonoBehaviour
             }
         }
 
-        bool shouldJump = false;
-        if (shouldJump && !mInAir)
+        if (ShouldJump() && !mInAir)
         {
             Vector3 jumpForce = Vector3.up * jumpAccel;
             mRigidbody.AddForce(jumpForce);
         }
-        
+    }
+
+    private bool ShouldJump()
+    {
+        return mEmotion == Emotion.HAPPY;
     }
 
     private bool CanChangeDirection()
@@ -134,5 +138,10 @@ public class Player : MonoBehaviour
     {
         mFacingDirection = newDir;
         // transform.rotation = Quaternion.Euler(FACING_VECTORS[(int)newDir]); // not needed? if movement is not relative to facing direction
+    }
+
+    public void SetEmotion(Emotion e)
+    {
+        mEmotion = e;
     }
 }
