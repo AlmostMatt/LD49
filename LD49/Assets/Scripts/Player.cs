@@ -87,6 +87,7 @@ public class Player : MonoBehaviour
         }
 
         mAnimator.SetFloat("Speed", mRigidbody.velocity.magnitude);
+        mQuadAnimator.flipX = mRigidbody.velocity.x < 0;
     }
 
     private void DoDirectionalMovement()
@@ -174,9 +175,7 @@ public class Player : MonoBehaviour
     private void ChangeDirection(FacingDirection newDir)
     {
         mFacingDirection = newDir;
-        // transform.rotation = Quaternion.Euler(FACING_VECTORS[(int)newDir]); // not needed? if movement is not relative to facing direction
-
-        mQuadAnimator.flipX = mFacingDirection == FacingDirection.WEST;
+        // transform.rotation = Quaternion.Euler(FACING_VECTORS[(int)newDir]); // not needed? if movement is not relative to facing direction        
     }
 
     public void SetEmotion(Emotion e)
