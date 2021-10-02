@@ -40,8 +40,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         mRigidbody = GetComponent<Rigidbody>();
-
-        mCapsule = GetComponent<CapsuleCollider>();
+        mCapsule = GetComponent<CapsuleCollider>();        
     }
 
     // Update is called once per frame
@@ -64,7 +63,7 @@ public class Player : MonoBehaviour
             mInAir = false;
         }
 
-        if (mEmotion == Emotion.NEUTRAL)
+        if (mEmotion == Emotion.NEUTRAL || mEmotion == Emotion.ANGRY)
         {
             DoDirectionalMovement();
         }
@@ -174,5 +173,10 @@ public class Player : MonoBehaviour
     public void SetEmotion(Emotion e)
     {
         mEmotion = e;
+
+        if (mEmotion == Emotion.HAPPY)
+        {
+            mJumpCooldown = happyJumpTimer;
+        }
     }
 }
