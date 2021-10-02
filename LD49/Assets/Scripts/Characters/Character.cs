@@ -77,7 +77,6 @@ public class Character : MonoBehaviour
 
     protected void DoDirectionalMovement(Vector2 inputVector)
     {
-        Debug.Log("moving - " + inputVector.ToString());
         float horz = inputVector.x;
         float vert = inputVector.y;
 
