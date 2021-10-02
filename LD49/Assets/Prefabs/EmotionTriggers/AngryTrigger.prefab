@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2401370624291019140}
   - component: {fileID: 2401370624291019138}
   - component: {fileID: 2401370624291019141}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 2401370625028023513}
   - component: {fileID: 2401370625028023512}
   - component: {fileID: 2401370625028023515}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AngryTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,3 +138,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emotion: 2
+  oneTimeUse: 0
