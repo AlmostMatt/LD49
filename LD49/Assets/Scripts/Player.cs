@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public float normalMoveMaxSpeed = 5f;
     public float normalMoveAccel = 50f;
+    public float jumpAccel = 10f;
 
     enum FacingDirection
     {
@@ -26,6 +27,8 @@ public class Player : MonoBehaviour
     private FacingDirection mFacingDirection = FacingDirection.EAST;
     private Rigidbody mRigidbody;
 
+    private bool mInAir = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,11 +43,18 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        // in air check
+        mInAir = true;
+        if (Physics.Raycast(transform.position, Vector3.down, 1.01f))
+        {
+            mInAir = false;
+        }
+
+        // movement/facing
         float horz = Input.GetAxis("Horizontal");
         float vert = Input.GetAxis("Vertical");
 
         FacingDirection desiredFacingDirection = mFacingDirection;
-
         if (horz != 0)
         {
             if (horz > 0)
@@ -69,26 +79,43 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (desiredFacingDirection != mFacingDirection)
-        {
-            ChangeDirection(desiredFacingDirection);
+        if (CanChangeDirection())
+        {            
+            if (desiredFacingDirection != mFacingDirection)
+            {
+                ChangeDirection(desiredFacingDirection);
+            }
+
+            Vector3 desiredDir = new Vector3(horz, 0, vert);
+            Vector3 desiredVelocity = Vector3.zero;
+            if (desiredDir.magnitude > 0)
+            {
+                desiredVelocity = GetMaxSpeed() * desiredDir.normalized;
+            }
+
+            Vector3 xzVelocity = mRigidbody.velocity;
+            xzVelocity.y = 0;
+            Vector3 deltaV = desiredVelocity - xzVelocity;
+            if (deltaV.magnitude > 0)
+            {
+                float accelNeeded = deltaV.magnitude / Time.fixedDeltaTime;
+                Vector3 movementForce = deltaV.normalized * Mathf.Min(accelNeeded, GetAccel());
+                mRigidbody.AddForce(movementForce);
+            }
         }
 
-
-        Vector3 desiredDir = new Vector3(horz, 0, vert);
-        Vector3 desiredVelocity = Vector3.zero;
-        if (desiredDir.magnitude > 0)
+        bool shouldJump = false;
+        if (shouldJump && !mInAir)
         {
-            desiredVelocity = GetMaxSpeed() * desiredDir.normalized;
+            Vector3 jumpForce = Vector3.up * jumpAccel;
+            mRigidbody.AddForce(jumpForce);
         }
+        
+    }
 
-        Vector3 deltaV = desiredVelocity - mRigidbody.velocity;
-        if (deltaV.magnitude > 0)
-        {
-            float accelNeeded = deltaV.magnitude / Time.fixedDeltaTime;
-            Vector3 movementForce = deltaV.normalized * Mathf.Min(accelNeeded, GetAccel());
-            mRigidbody.AddForce(movementForce);
-        }
+    private bool CanChangeDirection()
+    {
+        return !mInAir;
     }
 
     private float GetMaxSpeed()
