@@ -2003,6 +2003,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6686201163283154086, guid: 4945387d2516a224c9141421096aceac,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 4158bb6384fd76d4d9e5324ad7e696e0,
+        type: 2}
     - target: {fileID: 6686201163283154107, guid: 4945387d2516a224c9141421096aceac,
         type: 3}
       propertyPath: m_RootOrder
