@@ -36,11 +36,14 @@ public class Player : MonoBehaviour
     private float mCapsuleCenterToFeet;
     private CapsuleCollider mCapsule;
 
+    private Animator mAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
         mRigidbody = GetComponent<Rigidbody>();
-        mCapsule = GetComponent<CapsuleCollider>();        
+        mCapsule = GetComponent<CapsuleCollider>();
+        mAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -80,6 +83,8 @@ public class Player : MonoBehaviour
                 DoDirectionalMovement();
             }
         }
+
+        mAnimator.SetFloat("Speed", mRigidbody.velocity.magnitude);
     }
 
     private void DoDirectionalMovement()
