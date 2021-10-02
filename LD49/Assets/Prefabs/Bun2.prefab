@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 4514737512521135119}
   - component: {fileID: 4514737512521135118}
   - component: {fileID: 1386232275}
+  - component: {fileID: 3930372121111654146}
   m_Layer: 0
   m_Name: Bun2
   m_TagString: Untagged
@@ -266,3 +267,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotion: 1
   oneTimeUse: 0
+--- !u!114 &3930372121111654146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4514737512521135112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9cf2acc19251954f8d70f98f888fc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

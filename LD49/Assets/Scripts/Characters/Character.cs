@@ -154,4 +154,29 @@ public class Character : MonoBehaviour
         }
     }
 
+    public Emotion GetEmotion()
+    {
+        return mEmotion;
+    }
+
+    // This can be used to find nearby cats, players, or meatbuns
+    public T ObjectInRangeOrNull<T>(float radius) where T : MonoBehaviour
+    {
+        T closestT = null;
+        foreach (Collider other in Physics.OverlapSphere(
+            transform.position, radius, LayerMask.GetMask("Default"), QueryTriggerInteraction.Collide))
+        {
+            T otherT = other.GetComponent<T>();
+            if (otherT != null)
+            {
+                if (closestT == null ||
+                    (otherT.transform.position - transform.position).sqrMagnitude
+                    < (closestT.transform.position - transform.position).sqrMagnitude)
+                {
+                    closestT = otherT;
+                }
+            }
+        }
+        return closestT;
+    }
 }
