@@ -45,12 +45,10 @@ public class Player : MonoBehaviour
     {
         // in air check
         mInAir = true;
-//        Vector3 footPos = transform.position;
         if (Physics.Raycast(transform.position, Vector3.down, 1.01f))
         {
             mInAir = false;
         }
-        Debug.Log("in air: " + mInAir);
 
         // movement/facing
         float horz = Input.GetAxis("Horizontal");
