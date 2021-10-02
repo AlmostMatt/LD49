@@ -54,9 +54,16 @@ public class Character : MonoBehaviour
         {
             mInAir = false;
         }
-        
-        mAnimator.SetFloat("Speed", mRigidbody.velocity.magnitude);
-        mQuadAnimator.flipX = mRigidbody.velocity.x < 0;
+
+        // TODO - add mAnimator and mQuadAnimator to cat so that it can rotate like player
+        if (mAnimator != null)
+        {
+            mAnimator.SetFloat("Speed", mRigidbody.velocity.magnitude);
+        }
+        if (mQuadAnimator != null)
+        {
+            mQuadAnimator.flipX = mRigidbody.velocity.x < 0;
+        }
     }
 
     protected void DoDirectionalMovement(Vector2 inputVector)

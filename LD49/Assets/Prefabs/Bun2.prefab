@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 4514737512521135116}
   - component: {fileID: 4514737512521135119}
   - component: {fileID: 4514737512521135118}
+  - component: {fileID: 1386232275}
   m_Layer: 0
   m_Name: Bun2
   m_TagString: Untagged
@@ -251,3 +252,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &1386232275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4514737512521135112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffa204833a8e3ae4e8461e5eed73a9f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emotion: 1
+  oneTimeUse: 0
