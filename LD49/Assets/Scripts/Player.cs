@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
             mInAir = false;
         }
 
-        if (mEmotion == Emotion.NEUTRAL)
+        if (mEmotion != Emotion.HAPPY)
         {
             DoDirectionalMovement();
         }
@@ -178,9 +178,13 @@ public class Player : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        Breakable breakable = collision.gameObject.GetComponent<Breakable>();
-        if (breakable != null) {
-            breakable.Break();
+        if (mEmotion == Emotion.ANGRY)
+        {
+            Breakable breakable = collision.gameObject.GetComponent<Breakable>();
+            if (breakable != null)
+            {
+                breakable.Break();
+            }
         }
     }
 }
