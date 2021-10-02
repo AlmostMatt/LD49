@@ -7,9 +7,20 @@ public class EmotionTrigger : MonoBehaviour
     public Emotion emotion;
     public bool oneTimeUse = false;
 
+    public void Start()
+    {
+        // The presence of a start (or update) method is necessary so that the component can be disabled.
+        // Since enable/disable normally only affects start/update methods.
+        // but I call isActiveAndEnabled below
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(name + " trigger with " + other.name);
+        if (!isActiveAndEnabled) {
+            return;
+        }
+
+        // Debug.Log(name + " trigger with " + other.name);
         Player player = other.GetComponent<Player>();
         if (player != null)
         {

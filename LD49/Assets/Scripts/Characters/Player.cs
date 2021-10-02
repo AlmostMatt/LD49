@@ -37,7 +37,6 @@ public class Player : Character
                 mJumpCooldown = happyJumpTimer;
 
                 DoDirectionalMovement(inputVector, true);
-                Debug.Log("jump V - " + mRigidbody.velocity.ToString());
             }
         }
     }
