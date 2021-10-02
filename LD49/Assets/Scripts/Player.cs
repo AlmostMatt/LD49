@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
 
     private bool ShouldJump()
     {
-        return mEmotion == Emotion.HAPPY || Input.GetButton("Jump");
+        return mEmotion == Emotion.HAPPY || Input.GetButton("Jump"); // TODO - remove the input button
     }
 
     private bool CanJump()
@@ -174,5 +174,13 @@ public class Player : MonoBehaviour
     public void SetEmotion(Emotion e)
     {
         mEmotion = e;
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        Breakable breakable = collision.gameObject.GetComponent<Breakable>();
+        if (breakable != null) {
+            breakable.Break();
+        }
     }
 }
