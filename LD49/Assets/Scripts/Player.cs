@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
             mInAir = false;
         }
 
-        if (mEmotion == Emotion.NEUTRAL || mEmotion == Emotion.ANGRY)
+        if (mEmotion != Emotion.HAPPY)
         {
             DoDirectionalMovement();
         }
@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
 
     private bool ShouldJump()
     {
-        return mEmotion == Emotion.HAPPY || Input.GetButton("Jump");
+        return mEmotion == Emotion.HAPPY || Input.GetButton("Jump"); // TODO - remove the input button
     }
 
     private bool CanJump()
@@ -177,6 +177,28 @@ public class Player : MonoBehaviour
         if (mEmotion == Emotion.HAPPY)
         {
             mJumpCooldown = happyJumpTimer;
+        }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        BreakIfBreakableAndAngry(collision.gameObject);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        BreakIfBreakableAndAngry(other.gameObject);
+    }
+
+    private void BreakIfBreakableAndAngry(GameObject other)
+    {
+        if (mEmotion == Emotion.ANGRY)
+        {
+            Breakable breakable = other.GetComponent<Breakable>();
+            if (breakable != null)
+            {
+                breakable.Break();
+            }
         }
     }
 }
