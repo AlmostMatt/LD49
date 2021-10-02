@@ -32,7 +32,7 @@ public class Character : MonoBehaviour
     private CapsuleCollider mCapsule;
 
     private FacingDirection mFacingDirection = FacingDirection.EAST;
-    private Animator mAnimator;
+    protected Animator mAnimator;
     private QuadAnimator mQuadAnimator;
 
     // Start is called before the first frame update
