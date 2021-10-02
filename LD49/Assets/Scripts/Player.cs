@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     public float normalMoveAccel = 50f;
     public float jumpAccel = 10f;
 
+    public float happyJumpTimer = 1f;
+
     enum FacingDirection
     {
         NORTH,
@@ -29,29 +31,70 @@ public class Player : MonoBehaviour
     private FacingDirection mFacingDirection = FacingDirection.EAST;
     private Rigidbody mRigidbody;
     private bool mInAir = false;
+    private float mJumpCooldown = 0f;
+
+    private float mCapsuleCenterToFeet;
 
     // Start is called before the first frame update
     void Start()
     {
         mRigidbody = GetComponent<Rigidbody>();
+
+        CapsuleCollider capsule = GetComponent<CapsuleCollider>();
+        mCapsuleCenterToFeet = capsule.height * 0.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (mJumpCooldown > 0f)
+        {
+            mJumpCooldown -= Time.deltaTime;
+        }
     }
 
     void FixedUpdate()
     {
         // in air check
+        bool prev = mInAir;
         mInAir = true;
-        if (Physics.Raycast(transform.position, Vector3.down, 1.01f))
+        RaycastHit hitInfo;
+        if (Physics.Raycast(transform.position, Vector3.down, out hitInfo, mCapsuleCenterToFeet)) // todo: capsule sweep?
         {
+            if (prev)
+            {
+                Debug.Log("on ground");
+            }
+            
             mInAir = false;
         }
+        else if (!prev)
+        {
+            Debug.Log("in air");
+            Debug.Break();
+        }
 
-        // movement/facing
+        if (mEmotion == Emotion.NEUTRAL)
+        {
+            DoDirectionalMovement();
+        }
+        else if (mEmotion == Emotion.HAPPY)
+        {
+            // totally different movement if happy and jumping
+            if (CanJump())
+            {
+                Vector3 jumpForce = Vector3.up * jumpAccel;
+                mRigidbody.velocity = Vector3.zero;
+                mRigidbody.AddForce(jumpForce);
+                mJumpCooldown = happyJumpTimer;
+
+                DoDirectionalMovement();
+            }
+        }
+    }
+
+    private void DoDirectionalMovement()
+    {
         float horz = Input.GetAxis("Horizontal");
         float vert = Input.GetAxis("Vertical");
 
@@ -81,7 +124,7 @@ public class Player : MonoBehaviour
         }
 
         if (CanChangeDirection())
-        {            
+        {
             if (desiredFacingDirection != mFacingDirection)
             {
                 ChangeDirection(desiredFacingDirection);
@@ -104,17 +147,16 @@ public class Player : MonoBehaviour
                 mRigidbody.AddForce(movementForce);
             }
         }
-
-        if (ShouldJump() && !mInAir)
-        {
-            Vector3 jumpForce = Vector3.up * jumpAccel;
-            mRigidbody.AddForce(jumpForce);
-        }
     }
 
     private bool ShouldJump()
     {
-        return mEmotion == Emotion.HAPPY;
+        return mEmotion == Emotion.HAPPY || Input.GetButton("Jump");
+    }
+
+    private bool CanJump()
+    {
+        return !mInAir && mRigidbody.velocity.y <= 0f && mJumpCooldown <= 0f;
     }
 
     private bool CanChangeDirection()
@@ -124,8 +166,7 @@ public class Player : MonoBehaviour
 
     private float GetMaxSpeed()
     {
-        // todo: emotion check
-        return normalMoveMaxSpeed;
+        return mEmotion.GetMaxSpeed();
     }
 
     private float GetAccel()
