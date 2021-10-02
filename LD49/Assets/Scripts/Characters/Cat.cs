@@ -43,6 +43,10 @@ public class Cat : Character
         // TODO - edge case? if cat has bun, player will become angry before cat becomes angry.
         else if (nearbyPlayer != null && mCurrentlyHeldFood == null) {
             // Chase!
+            if (mEmotion != Emotion.ANGRY)
+            {
+                Debug.Log("Cat became angry because it saw a player");
+            }
             SetEmotion(Emotion.ANGRY);
             directionVector = nearbyPlayer.transform.position - transform.position;
             // Stop if close enough
