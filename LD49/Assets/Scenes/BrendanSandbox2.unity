@@ -1947,46 +1947,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5799431823130715851, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6521743143964753254, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_FieldOfView
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6521743143964753254, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_Orthographic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6521743143964753254, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_IgnoreLayers.m_Bits
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6521743143973958532, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.997
-      objectReference: {fileID: 0}
-    - target: {fileID: 6521743143973958532, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6521743143973958532, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6521743143973958532, guid: 4945387d2516a224c9141421096aceac,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
     - target: {fileID: 6686201163283154084, guid: 4945387d2516a224c9141421096aceac,
         type: 3}
       propertyPath: m_Name
