@@ -8,9 +8,10 @@ public class Player : Character
     public float happyJumpTimer = 1f;
     private float mJumpCooldown = 0f;
 
-    // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        base.Update();
+
         if (mJumpCooldown > 0f)
         {
             mJumpCooldown -= Time.deltaTime;

@@ -44,6 +44,12 @@ public class Character : MonoBehaviour
         mQuadAnimator = GetComponentInChildren<QuadAnimator>();
     }
 
+    public virtual void Update()
+    {
+        mAnimator.SetInteger("Emotion", (int)mEmotion);
+        mAnimator.SetBool("InAir", mInAir);
+    }
+
     public virtual void FixedUpdate()
     {
         // in air check
