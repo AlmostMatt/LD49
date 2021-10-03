@@ -164,6 +164,7 @@ MonoBehaviour:
   normalMoveAccel: 50
   jumpAccel: 250
   horizontalFlipGroup: {fileID: 0}
+  mEmotion: 0
   visionRadius: 3
   happyJumpTimer: 0.1
   skipHeightMultiplier: 0.6
@@ -242,7 +243,7 @@ PrefabInstance:
     - target: {fileID: 7217624579564069879, guid: 4e089a97117216d4296a766a6082b938,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.126
+      value: 1.232
       objectReference: {fileID: 0}
     - target: {fileID: 7217624579564069879, guid: 4e089a97117216d4296a766a6082b938,
         type: 3}
@@ -322,7 +323,7 @@ PrefabInstance:
     - target: {fileID: 7217624579564069879, guid: 4e089a97117216d4296a766a6082b938,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.354
+      value: 1.4599999
       objectReference: {fileID: 0}
     - target: {fileID: 7217624579564069879, guid: 4e089a97117216d4296a766a6082b938,
         type: 3}
@@ -475,7 +476,7 @@ PrefabInstance:
     - target: {fileID: 7217624579564069879, guid: 4e089a97117216d4296a766a6082b938,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.149
+      value: 1.255
       objectReference: {fileID: 0}
     - target: {fileID: 7217624579564069879, guid: 4e089a97117216d4296a766a6082b938,
         type: 3}
