@@ -35,7 +35,8 @@ public class Player : Character
         {
             SetEmotion(Emotion.AFRAID);
         }
-        else if (nearbyFood != null)
+        // Ignore food if already joyful. If food is consumed later, maybe change this to allow smitten for more food.
+        else if (nearbyFood != null && GetEmotion() != Emotion.JOYFUL)
         {
             // The food is the child of the cat while the cat is carrying it
             bool catHasFood = nearbyFood.transform.parent != null;
