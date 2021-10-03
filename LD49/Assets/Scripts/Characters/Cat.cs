@@ -5,38 +5,62 @@ using UnityEngine.AI;
 
 public class Cat : Character
 {
-    public float visionRadius = 3f;
+    public float visionRadius = 3f; // Other object collider radius is added to this
+    public float fleeRadius = 4f; // Does not include other object collider radius.
     public Transform foodAttachPoint;
 
     private Food mCurrentlyHeldFood = null;
-    private float mRecentlyDroppedFoodCooldown = 0f;
+    private bool mRecentlyDroppedFood = false;
     private NavMeshPath mPath = null;
 
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+        NavMeshPath desiredPath = HandleEmotionTriggersAndGetPath();
+        if (mEmotion != Emotion.JOYFUL && desiredPath != null)
+        {
+            FollowPath(desiredPath);
+        }
+    }
+
+    private NavMeshPath HandleEmotionTriggersAndGetPath()
+    {
         // Emotion triggers and movement
-        // Default to being lazy
-        NavMeshPath desiredPath = null;
         // Only notice nearby food if not already holding food.
         Food nearbyFood = null;
-        if (mCurrentlyHeldFood == null && mRecentlyDroppedFoodCooldown <= 0f)
+        if (mCurrentlyHeldFood == null && !mRecentlyDroppedFood)
         {
             nearbyFood = ObjectInRangeOrNull<Food>(visionRadius);
         }
         Player nearbyPlayer = ObjectInRangeOrNull<Player>(visionRadius);
-        // Angry player - run away!
+        // If recently dropped food, run away!
+        if (mRecentlyDroppedFood)
+        {
+            if (nearbyPlayer != null)
+            {
+                // Run away!
+                SetEmotion(Emotion.AFRAID);
+                return FindPathFleeingPoint(nearbyPlayer.transform.position, fleeRadius);
+            }
+            else
+            {
+                // After running away, feel free to do anything
+                mRecentlyDroppedFood = false;
+                SetEmotion(Emotion.NEUTRAL);
+            }
+        }
+        // Angry player - run away! (keep running if food dropped recently)
         if (nearbyPlayer != null && nearbyPlayer.GetEmotion() == Emotion.ANGRY)
         {
             // Run away!
             SetEmotion(Emotion.AFRAID);
-            desiredPath = FindPathFleeingPoint(nearbyPlayer.transform.position, visionRadius * 1.5f);
+            return FindPathFleeingPoint(nearbyPlayer.transform.position, fleeRadius);
         }
         else if (nearbyFood != null)
         {
             // Go get the food!
             SetEmotion(Emotion.SMITTEN);
-            desiredPath = FindPathToPoint(nearbyFood.transform.position);
+            return FindPathToPoint(nearbyFood.transform.position);
         }
         // TODO - edge case? if cat has bun, player will become angry before cat becomes angry.
         else if (nearbyPlayer != null && mCurrentlyHeldFood == null)
@@ -47,18 +71,15 @@ public class Cat : Character
                 Debug.Log("Cat became angry because it saw a player");
             }
             SetEmotion(Emotion.ANGRY);
-            desiredPath = FindPathToPoint(nearbyPlayer.transform.position);
+            return FindPathToPoint(nearbyPlayer.transform.position);
         }
         else
         {
             // Cat resets to neutral when nothing is happening.
             SetEmotion(Emotion.NEUTRAL);
         }
-        if (mEmotion != Emotion.JOYFUL && desiredPath != null)
-        {
-            FollowPath(desiredPath);
-        }
-        mRecentlyDroppedFoodCooldown -= Time.fixedDeltaTime;
+        // Default to being lazy
+        return null;
     }
 
     private NavMeshPath FindPathToPoint(Vector3 targetPos)
@@ -142,7 +163,7 @@ public class Cat : Character
 
     private void PickupFood(Food food)
     {
-        if (mCurrentlyHeldFood != null || mRecentlyDroppedFoodCooldown > 0f)
+        if (mCurrentlyHeldFood != null || mRecentlyDroppedFood)
         {
             return;
         }
@@ -167,7 +188,7 @@ public class Cat : Character
             mCurrentlyHeldFood.GetComponent<EmotionTrigger>().enabled = true;
             mCurrentlyHeldFood = null;
             // don't allow cat to pickup again for 0.5s
-            mRecentlyDroppedFoodCooldown = 0.5f;
+            mRecentlyDroppedFood = true;
         }
     }
 
@@ -210,6 +231,7 @@ public class Cat : Character
     private void OnDrawGizmos()
     {
         /*
+         * Draw potential paths for fleeing cat
         Color[] colors = new Color[] { Color.red, Color.green, Color.blue, Color.yellow, Color.magenta, Color.cyan};
         Player nearbyPlayer = ObjectInRangeOrNull<Player>(visionRadius);
         if (nearbyPlayer != null)
