@@ -38,7 +38,7 @@ public class Character : MonoBehaviour
     private QuadAnimator mQuadAnimator;
     private bool mFlipX = false;
 
-    private string[] OBJECT_IN_RANGE_LAYERS = { "Default", "Cat", "Player" };
+    private string[] OBJECT_IN_RANGE_LAYERS = { "Cat", "Player", "Collectible" };
 
     // Start is called before the first frame update
     void Start()

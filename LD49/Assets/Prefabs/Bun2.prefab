@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4514737511079393362}
   - component: {fileID: 4514737511079393373}
   - component: {fileID: 4514737511079393372}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4514737511274780239}
   - component: {fileID: 4514737511274780236}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 4514737512521135119}
   - component: {fileID: 1386232275}
   - component: {fileID: 3930372121111654146}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bun2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

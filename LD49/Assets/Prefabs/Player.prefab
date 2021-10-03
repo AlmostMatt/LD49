@@ -163,6 +163,7 @@ MonoBehaviour:
   normalMoveMaxSpeed: 3
   normalMoveAccel: 50
   jumpAccel: 250
+  horizontalFlipGroup: {fileID: 0}
   visionRadius: 3
   happyJumpTimer: 0.1
   skipHeightMultiplier: 0.6
@@ -382,10 +383,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlobShadowProjector
       objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -429,14 +426,6 @@ PrefabInstance:
     - target: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11900000, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
-      propertyPath: m_FieldOfView
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 11900000, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
-      propertyPath: m_IgnoreLayers.m_Bits
-      value: 772
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
