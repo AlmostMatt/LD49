@@ -165,7 +165,8 @@ public class Character : MonoBehaviour
         return !mInAir;
     }
 
-    private float GetMaxSpeed()
+    // Cat and Player can override this
+    protected virtual float GetMaxSpeed()
     {
         return mEmotion.GetMaxSpeed();
     }

@@ -177,4 +177,10 @@ public class Cat : Character
         }
         Gizmos.DrawSphere(mPathCorners[1], 0.05f);
     }
+
+    protected override float GetMaxSpeed()
+    {
+        // TODO - maybe make cat speed vary based on emotion.
+        return 3f;
+    }
 }
