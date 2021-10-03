@@ -6,6 +6,9 @@ TagManager:
   tags:
   - AngryEnvFx
   - JoyfulEnvFx
+  - AfraidEnvFx
+  - SmittenEnvFx
+  - LevelManager
   layers:
   - Default
   - TransparentFX
