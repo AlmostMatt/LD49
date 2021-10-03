@@ -7,6 +7,7 @@ public class Player : Character
     public float visionRadius = 3f;
     // Player jumps when joyful
     public float happyJumpTimer = 1f;
+    public float skipHeightMultiplier = 0.5f;
     private float mJumpCooldown = 0f;
     private bool mAlternateFoot = false;
 
@@ -73,7 +74,7 @@ public class Player : Character
                 if (!mAlternateFoot)
                 {
                     // skip
-                    Vector3 jumpForce = Vector3.up * jumpAccel * 0.6f;
+                    Vector3 jumpForce = Vector3.up * jumpAccel * skipHeightMultiplier;
                     mRigidbody.velocity = Vector3.zero;
                     mRigidbody.AddForce(jumpForce);
                     
