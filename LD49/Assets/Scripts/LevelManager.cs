@@ -46,9 +46,16 @@ public class LevelManager : MonoBehaviour
     {
         if (sLevelManagerSingleton == null)
         {
-            sLevelManagerSingleton = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+            GameObject levelManager = GameObject.FindGameObjectWithTag("LevelManager");
+            if (levelManager != null)
+            {
+                sLevelManagerSingleton = levelManager.GetComponent<LevelManager>();
+            }
         }
-        sLevelManagerSingleton.LevelFinishedInternal();
+        if (sLevelManagerSingleton != null) // could still be null if running directly in a level (instead of from the main scene)
+        {
+            sLevelManagerSingleton.LevelFinishedInternal();
+        }
     }
 
     private void LevelFinishedInternal()
@@ -82,6 +89,7 @@ public class LevelManager : MonoBehaviour
 
     private void GoToLevelInternal(string name, float delay)
     {
+        HUDControl.FadeToBlack();
         mPendingLevel = name;
         mSceneLoadState = SceneLoadState.SLS_NEXT_SCENE_PENDING;
         mNextLevelTimer = delay;
@@ -106,6 +114,12 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
+        if (mOpeningLevelCamera != null)
+        {
+            // reenable original camera while no other scenes are loaded
+            mOpeningLevelCamera.gameObject.SetActive(true);
+        }
+
         mSceneLoadState = SceneLoadState.SLS_LOADING;
         mCurrentLoadOp = SceneManager.LoadSceneAsync(mPendingLevel, LoadSceneMode.Additive);
         if (mCurrentLoadOp == null)
@@ -123,11 +137,11 @@ public class LevelManager : MonoBehaviour
 
         if (mOpeningLevelCamera != null)
         {
-            // one-time thing to disable main menu camera
+            // disable main scene camera when the new scene is here
             mOpeningLevelCamera.gameObject.SetActive(false);
-            mOpeningLevelCamera = null;
         }
 
+        HUDControl.FadeFromBlack();
         Debug.Log("Scene loaded");
     }
 
