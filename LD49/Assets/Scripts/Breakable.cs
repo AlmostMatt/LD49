@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Breakable : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class Breakable : MonoBehaviour
         foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>())
         {
             renderer.enabled = false;
+        }
+        foreach (NavMeshObstacle obstacle in GetComponentsInChildren<NavMeshObstacle>())
+        {
+            obstacle.enabled = false;
         }
     }
 }
