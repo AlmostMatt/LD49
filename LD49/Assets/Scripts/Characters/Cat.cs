@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Cat : Character
 {
@@ -9,12 +10,14 @@ public class Cat : Character
 
     private Food mCurrentlyHeldFood = null;
     private float mRecentlyDroppedFoodCooldown = 0f;
+    private Vector3[] mPathCorners;
 
     public override void FixedUpdate()
     {
         base.FixedUpdate();
         // Emotion triggers and movement
         // Default to being lazy
+        Vector3 targetPos = transform.position;
         Vector3 directionVector = Vector3.zero;
         // Only notice nearby food if not already holding food.
         Food nearbyFood = null;
@@ -24,45 +27,71 @@ public class Cat : Character
         }
         Player nearbyPlayer = ObjectInRangeOrNull<Player>(visionRadius);
         // Angry player - run away!
-        if (nearbyPlayer != null && nearbyPlayer.GetEmotion() == Emotion.ANGRY) {
+        if (nearbyPlayer != null && nearbyPlayer.GetEmotion() == Emotion.ANGRY)
+        {
             // Run away!
             SetEmotion(Emotion.AFRAID);
-            directionVector = transform.position - nearbyPlayer.transform.position;
+            Vector3 awayDir = (transform.position - nearbyPlayer.transform.position);
+            targetPos = transform.position + awayDir.normalized;
         }
         else if (nearbyFood != null)
         {
             // Go get the food!
             SetEmotion(Emotion.SMITTEN);
-            directionVector = nearbyFood.transform.position - transform.position;
-            // Stop if close enough
-            if (directionVector.sqrMagnitude < 0.1f)
-            {
-                directionVector = Vector3.zero;
-            }
+            targetPos = nearbyFood.transform.position;
         }
         // TODO - edge case? if cat has bun, player will become angry before cat becomes angry.
-        else if (nearbyPlayer != null && mCurrentlyHeldFood == null) {
+        else if (nearbyPlayer != null && mCurrentlyHeldFood == null)
+        {
             // Chase!
             if (mEmotion != Emotion.ANGRY)
             {
                 Debug.Log("Cat became angry because it saw a player");
             }
             SetEmotion(Emotion.ANGRY);
-            directionVector = nearbyPlayer.transform.position - transform.position;
-            // Stop if close enough
-            if (directionVector.sqrMagnitude < 0.1f)
-            {
-                directionVector = Vector3.zero;
-            }
-        } else
+            targetPos = nearbyPlayer.transform.position;
+        }
+        else
         {
             // Cat resets to neutral when nothing is happening.
             SetEmotion(Emotion.NEUTRAL);
         }
         if (mEmotion != Emotion.JOYFUL)
         {
-            Vector2 inputVector = new Vector2(directionVector.x, directionVector.z);
-            DoDirectionalMovement(inputVector.normalized);
+            // Vector2 inputVector = new Vector2(directionVector.x, directionVector.z);
+            //DoDirectionalMovement(inputVector.normalized);
+            // Vector3 targetPos = nearbyPlayer.transform.position;
+            // raycast downward to find the ground.
+            bool rayHit = Physics.Raycast(targetPos, Vector3.down, out RaycastHit hitInfo, 10f, LayerMask.GetMask("Default"));
+            if (rayHit)
+            {
+                targetPos = hitInfo.point;
+                NavMeshPath path = new NavMeshPath();
+                NavMesh.CalculatePath(transform.position, targetPos, NavMesh.AllAreas, path);
+                if (path.status == NavMeshPathStatus.PathComplete)
+                {
+                    mPathCorners = path.corners;
+                    // agent.SetDestination();
+                    directionVector = (path.corners[1] - transform.position);
+                    Vector2 v = new Vector2(directionVector.x, directionVector.z);
+                    // Stop if close enough
+                    //if (v.sqrMagnitude < 0.01f)
+                    //{
+                    //    v = Vector2.zero;
+                    //} else
+                    //{
+                        v = v.normalized;
+                    //}
+                    DoDirectionalMovement(v);
+                    // Debug.Log(v);
+                    // Debug.Log(path.corners[1]);
+                    Debug.Log(mInAir);
+                }
+                else
+                {
+                    Debug.LogWarning(path.status);
+                }
+            }
         }
         mRecentlyDroppedFoodCooldown -= Time.fixedDeltaTime;
     }
@@ -132,5 +161,20 @@ public class Cat : Character
         {
             DropFood();
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (mPathCorners == null)
+        {
+            return;
+        }
+        for (int i = 1; i < mPathCorners.Length; i++)
+        {
+            Vector3 prevPoint = mPathCorners[i-1];
+            Vector3 nextPoint = mPathCorners[i];
+            Gizmos.DrawLine(prevPoint, nextPoint);
+        }
+        Gizmos.DrawSphere(mPathCorners[1], 0.05f);
     }
 }
