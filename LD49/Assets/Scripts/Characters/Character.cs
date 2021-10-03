@@ -26,7 +26,7 @@ public class Character : MonoBehaviour
 
     public Transform horizontalFlipGroup; // any stuff that should be mirrored when moving left
 
-    protected Emotion mEmotion = Emotion.NEUTRAL;
+    public Emotion mEmotion = Emotion.NEUTRAL; // change in editor to test a different starting emotion
     protected Rigidbody mRigidbody;
     protected bool mInAir = false;
 
