@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
+    path: Assets/Scenes/Levels/MainScene.unity
     guid: 5ff3de5d321b02d448e4a8b060585cb1
   - enabled: 1
     path: Assets/Scenes/MattSandbox.unity
@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BrendanSandbox2.unity
     guid: 9b9500955f4ea594c9573b597f9b2db7
+  - enabled: 1
+    path: Assets/Scenes/BrendanLevelTest.unity
+    guid: afdc96c89fa15ef4a9ddde18e08ec118
   m_configObjects: {}

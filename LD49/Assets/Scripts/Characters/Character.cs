@@ -83,7 +83,7 @@ public class Character : MonoBehaviour
             mAnimator.SetBool("Falling", mRigidbody.velocity.y < 0f);
         }
 
-        if (mRigidbody.velocity.x != 0)
+        if (Mathf.Abs(mRigidbody.velocity.x) > 0.01f)
         {
             bool flipX = mRigidbody.velocity.x < 0;
             if (mFlipX != flipX)
