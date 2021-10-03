@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : Character
 {
+    public float visionRadius = 3f;
     // Player jumps when joyful
     public float happyJumpTimer = 1f;
     private float mJumpCooldown = 0f;
@@ -23,10 +24,36 @@ public class Player : Character
         mAnimator.SetBool("AlternateFoot", mAlternateFoot);
     }
 
+    private void CheckEmotionTriggers()
+    {
+        Cat nearbyCat = ObjectInRangeOrNull<Cat>(visionRadius);
+        Food nearbyFood = ObjectInRangeOrNull<Food>(visionRadius);
+        // Angry cat - be afraid!
+        if (nearbyCat != null && nearbyCat.GetEmotion() == Emotion.ANGRY)
+        {
+            SetEmotion(Emotion.AFRAID);
+        }
+        else if (nearbyFood != null)
+        {
+            // The food is the child of the cat while the cat is carrying it
+            bool catHasFood = nearbyFood.transform.parent != null;
+            if (catHasFood)
+            {
+                SetEmotion(Emotion.ANGRY);
+            }
+            else
+            {
+                SetEmotion(Emotion.SMITTEN);
+            }
+        }
+        // Joy is triggered by touching an EmotionTrigger on the food.
+    }
+
     public override void FixedUpdate()
     {
         bool prevInAir = mInAir;
         base.FixedUpdate();
+        CheckEmotionTriggers();
         Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal") , Input.GetAxis("Vertical"));
         if (mEmotion != Emotion.JOYFUL)
         {
