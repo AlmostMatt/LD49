@@ -68,7 +68,7 @@ public class Cat : Character
                 targetPos = hitInfo.point;
                 NavMeshPath path = new NavMeshPath();
                 NavMesh.CalculatePath(transform.position, targetPos, NavMesh.AllAreas, path);
-                if (path.status == NavMeshPathStatus.PathComplete)
+                if (path.status == NavMeshPathStatus.PathComplete && path.corners.Length > 1)
                 {
                     mPathCorners = path.corners;
                     // agent.SetDestination();
@@ -165,7 +165,7 @@ public class Cat : Character
 
     private void OnDrawGizmos()
     {
-        if (mPathCorners == null)
+        if (mPathCorners == null || mPathCorners.Length < 2)
         {
             return;
         }
