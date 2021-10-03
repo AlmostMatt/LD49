@@ -10,15 +10,14 @@ public class Cat : Character
 
     private Food mCurrentlyHeldFood = null;
     private float mRecentlyDroppedFoodCooldown = 0f;
-    private Vector3[] mPathCorners;
+    private NavMeshPath mPath = null;
 
     public override void FixedUpdate()
     {
         base.FixedUpdate();
         // Emotion triggers and movement
         // Default to being lazy
-        Vector3 targetPos = transform.position;
-        Vector3 directionVector = Vector3.zero;
+        NavMeshPath desiredPath = null;
         // Only notice nearby food if not already holding food.
         Food nearbyFood = null;
         if (mCurrentlyHeldFood == null && mRecentlyDroppedFoodCooldown <= 0f)
@@ -31,14 +30,13 @@ public class Cat : Character
         {
             // Run away!
             SetEmotion(Emotion.AFRAID);
-            Vector3 awayDir = (transform.position - nearbyPlayer.transform.position);
-            targetPos = transform.position + awayDir.normalized;
+            desiredPath = FindPathFleeingPoint(nearbyPlayer.transform.position, visionRadius * 1.5f);
         }
         else if (nearbyFood != null)
         {
             // Go get the food!
             SetEmotion(Emotion.SMITTEN);
-            targetPos = nearbyFood.transform.position;
+            desiredPath = FindPathToPoint(nearbyFood.transform.position);
         }
         // TODO - edge case? if cat has bun, player will become angry before cat becomes angry.
         else if (nearbyPlayer != null && mCurrentlyHeldFood == null)
@@ -49,51 +47,97 @@ public class Cat : Character
                 Debug.Log("Cat became angry because it saw a player");
             }
             SetEmotion(Emotion.ANGRY);
-            targetPos = nearbyPlayer.transform.position;
+            desiredPath = FindPathToPoint(nearbyPlayer.transform.position);
         }
         else
         {
             // Cat resets to neutral when nothing is happening.
             SetEmotion(Emotion.NEUTRAL);
         }
-        if (mEmotion != Emotion.JOYFUL)
+        if (mEmotion != Emotion.JOYFUL && desiredPath != null)
         {
-            // Vector2 inputVector = new Vector2(directionVector.x, directionVector.z);
-            //DoDirectionalMovement(inputVector.normalized);
-            // Vector3 targetPos = nearbyPlayer.transform.position;
-            // raycast downward to find the ground.
-            bool rayHit = Physics.Raycast(targetPos, Vector3.down, out RaycastHit hitInfo, 10f, LayerMask.GetMask("Default"));
-            if (rayHit)
+            FollowPath(desiredPath);
+        }
+        mRecentlyDroppedFoodCooldown -= Time.fixedDeltaTime;
+    }
+
+    private NavMeshPath FindPathToPoint(Vector3 targetPos)
+    {
+        // Raycast downward from above the target to find the ground for that position.
+        targetPos.y += 10f;
+        bool rayHit = Physics.Raycast(targetPos, Vector3.down, out RaycastHit hitInfo, 100f, LayerMask.GetMask("Default"));
+        if (rayHit)
+        {
+            targetPos = hitInfo.point;
+            NavMeshPath path = new NavMeshPath();
+            NavMesh.CalculatePath(transform.position, targetPos, NavMesh.AllAreas, path);
+            if (path.status == NavMeshPathStatus.PathComplete && path.corners.Length > 1)
             {
-                targetPos = hitInfo.point;
-                NavMeshPath path = new NavMeshPath();
-                NavMesh.CalculatePath(transform.position, targetPos, NavMesh.AllAreas, path);
-                if (path.status == NavMeshPathStatus.PathComplete && path.corners.Length > 1)
+                return path;
+            }
+            else
+            {
+                Debug.LogWarning(path.status);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No nearby ground for Cat movement target.");
+        }
+        return null;
+    }
+
+    private NavMeshPath FindPathFleeingPoint(Vector3 threatPos, float desiredRadius)
+    {
+        // Try a bunch points that are the desired radius away from the threat.
+        NavMeshPath bestPath = null;
+        float bestPathLength = 0f;
+        int numPoints = 16;
+        for (int i=0; i<numPoints; i++)
+        {
+            float cosx = Mathf.Cos((2 * Mathf.PI * i) / numPoints);
+            float cosy = Mathf.Sin((2 * Mathf.PI * i) / numPoints);
+            Vector3 desiredPos = threatPos + (desiredRadius * new Vector3(cosx, 0f, cosy));
+            NavMeshPath possiblePath = FindPathToPoint(desiredPos);
+            if (possiblePath != null)
+            {
+                float pathLen = GetLengthOfPath(possiblePath);
+                if (bestPath == null || pathLen < bestPathLength)
                 {
-                    mPathCorners = path.corners;
-                    // agent.SetDestination();
-                    directionVector = (path.corners[1] - transform.position);
-                    Vector2 v = new Vector2(directionVector.x, directionVector.z);
-                    // Stop if close enough
-                    //if (v.sqrMagnitude < 0.01f)
-                    //{
-                    //    v = Vector2.zero;
-                    //} else
-                    //{
-                        v = v.normalized;
-                    //}
-                    DoDirectionalMovement(v);
-                    // Debug.Log(v);
-                    // Debug.Log(path.corners[1]);
-                    Debug.Log(mInAir);
-                }
-                else
-                {
-                    Debug.LogWarning(path.status);
+                    bestPath = possiblePath;
+                    bestPathLength = pathLen;
                 }
             }
         }
-        mRecentlyDroppedFoodCooldown -= Time.fixedDeltaTime;
+        return bestPath;
+    }
+
+    private void FollowPath(NavMeshPath path)
+    {
+        mPath = path;
+        Vector3 directionVector = (path.corners[1] - transform.position);
+        Vector2 moveVector = new Vector2(directionVector.x, directionVector.z);
+        // Stop if close enough (not sure if this is needed or relevant)
+        if (moveVector.sqrMagnitude < 0.01f)
+        {
+            moveVector = Vector2.zero;
+        } else
+        {
+            moveVector = moveVector.normalized;
+        }
+        DoDirectionalMovement(moveVector);
+    }
+
+    private float GetLengthOfPath(NavMeshPath path)
+    {
+        float length = 0f;
+        for (int i = 1; i < path.corners.Length; i++)
+        {
+            Vector3 prevPoint = path.corners[i - 1];
+            Vector3 nextPoint = path.corners[i];
+            length += (nextPoint - prevPoint).magnitude;
+        }
+        return length;
     }
 
     private void PickupFood(Food food)
@@ -165,17 +209,45 @@ public class Cat : Character
 
     private void OnDrawGizmos()
     {
-        if (mPathCorners == null || mPathCorners.Length < 2)
+        /*
+        Color[] colors = new Color[] { Color.red, Color.green, Color.blue, Color.yellow, Color.magenta, Color.cyan};
+        Player nearbyPlayer = ObjectInRangeOrNull<Player>(visionRadius);
+        if (nearbyPlayer != null)
+        {
+            float desiredRadius = visionRadius * 1.5f;
+            int numPoints = 16;
+            for (int i = 0; i < numPoints; i++)
+            {
+                Gizmos.color = colors[i % colors.Length];
+                float cosx = Mathf.Cos((2 * Mathf.PI * i) / numPoints);
+                float cosy = Mathf.Sin((2 * Mathf.PI * i) / numPoints);
+                Vector3 desiredPos = nearbyPlayer.transform.position + (desiredRadius * new Vector3(cosx, 0f, cosy));
+                NavMeshPath possiblePath = FindPathToPoint(desiredPos);
+                if (possiblePath != null)
+                {
+                    DrawPath(possiblePath);
+                    Gizmos.DrawSphere(desiredPos, 0.1f);
+                }
+            }
+        }
+        */
+        Gizmos.color = Color.white;
+        DrawPath(mPath);
+    }
+
+    private void DrawPath(NavMeshPath path)
+    {
+        if (path == null || path == null || path.corners.Length < 2)
         {
             return;
         }
-        for (int i = 1; i < mPathCorners.Length; i++)
+        for (int i = 1; i < path.corners.Length; i++)
         {
-            Vector3 prevPoint = mPathCorners[i-1];
-            Vector3 nextPoint = mPathCorners[i];
+            Vector3 prevPoint = path.corners[i - 1];
+            Vector3 nextPoint = path.corners[i];
             Gizmos.DrawLine(prevPoint, nextPoint);
+            Gizmos.DrawSphere(path.corners[i], 0.05f);
         }
-        Gizmos.DrawSphere(mPathCorners[1], 0.05f);
     }
 
     protected override float GetMaxSpeed()
