@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7611955933714401742}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bunAttachPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 3682196906280178141}
   - component: {fileID: 447873696958423647}
   - component: {fileID: 2321297598151648484}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 9006301320979644325}
   - component: {fileID: 9006301320979644345}
   - component: {fileID: 9006301320979644326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,6 +221,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EmotionEffect (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841208033597391921, guid: 4e089a97117216d4296a766a6082b938,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7217624579564069879, guid: 4e089a97117216d4296a766a6082b938,
         type: 3}
@@ -312,6 +317,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EmotionEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 2841208033597391921, guid: 4e089a97117216d4296a766a6082b938,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7217624579564069879, guid: 4e089a97117216d4296a766a6082b938,
         type: 3}
       propertyPath: m_RootOrder
@@ -401,6 +411,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EmotionEffect (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841208033597391921, guid: 4e089a97117216d4296a766a6082b938,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7217624579564069879, guid: 4e089a97117216d4296a766a6082b938,
         type: 3}

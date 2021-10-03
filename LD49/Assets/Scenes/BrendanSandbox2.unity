@@ -915,6 +915,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: JoyTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 3667403793416359784, guid: 061fe2135147bfc4880defa2019f321c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3667403793416359785, guid: 061fe2135147bfc4880defa2019f321c,
         type: 3}
       propertyPath: m_RootOrder
@@ -1732,7 +1737,7 @@ PrefabInstance:
     - target: {fileID: 3060835844036603094, guid: aee83a73699764d439f650ca14b86c01,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aee83a73699764d439f650ca14b86c01, type: 3}
@@ -3459,6 +3464,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AngryTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 2401370625028023514, guid: 1bc2347d1ef792d47a8e369f58abd67a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bc2347d1ef792d47a8e369f58abd67a, type: 3}
 --- !u!1001 &1731391234
@@ -4304,7 +4314,7 @@ PrefabInstance:
     - target: {fileID: 9006301320979644327, guid: afe00f10b4b8e4e4aa67d3d77ac16027,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9006301320979644344, guid: afe00f10b4b8e4e4aa67d3d77ac16027,
         type: 3}
@@ -4511,7 +4521,7 @@ PrefabInstance:
     - target: {fileID: 1535558424849406280, guid: 8ea0a575e049fd94db477b2c80fe5636,
         type: 3}
       propertyPath: m_Name
-      value: Main Camera
+      value: Main Camera (Sandbox)
       objectReference: {fileID: 0}
     - target: {fileID: 1535558424849406284, guid: 8ea0a575e049fd94db477b2c80fe5636,
         type: 3}

@@ -35,6 +35,8 @@ public class Character : MonoBehaviour
     protected Animator mAnimator;
     private QuadAnimator mQuadAnimator;
 
+    private string[] OBJECT_IN_RANGE_LAYERS = { "Default", "Cat", "Player" };
+
     // Start is called before the first frame update
     void Start()
     {
@@ -178,7 +180,7 @@ public class Character : MonoBehaviour
     {
         T closestT = null;
         foreach (Collider other in Physics.OverlapSphere(
-            transform.position, radius, LayerMask.GetMask("Default"), QueryTriggerInteraction.Collide))
+            transform.position, radius, LayerMask.GetMask(OBJECT_IN_RANGE_LAYERS), QueryTriggerInteraction.Collide))
         {
             T otherT = other.GetComponent<T>();
             if (otherT != null)
