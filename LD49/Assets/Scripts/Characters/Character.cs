@@ -24,6 +24,8 @@ public class Character : MonoBehaviour
     public float normalMoveAccel = 50f;
     public float jumpAccel = 10f;
 
+    public Transform horizontalFlipGroup; // any stuff that should be mirrored when moving left
+
     protected Emotion mEmotion = Emotion.NEUTRAL;
     protected Rigidbody mRigidbody;
     protected bool mInAir = false;
@@ -34,6 +36,7 @@ public class Character : MonoBehaviour
     private FacingDirection mFacingDirection = FacingDirection.EAST;
     protected Animator mAnimator;
     private QuadAnimator mQuadAnimator;
+    private bool mFlipX = false;
 
     private string[] OBJECT_IN_RANGE_LAYERS = { "Default", "Cat", "Player" };
 
@@ -77,9 +80,24 @@ public class Character : MonoBehaviour
         {
             mAnimator.SetFloat("Speed", mRigidbody.velocity.magnitude);
         }
-        if (mQuadAnimator != null)
+
+        if (mRigidbody.velocity.x != 0)
         {
-            mQuadAnimator.flipX = mRigidbody.velocity.x < 0;
+            bool flipX = mRigidbody.velocity.x < 0;
+            if (mFlipX != flipX)
+            {
+                if (mQuadAnimator != null)
+                {
+                    mQuadAnimator.flipX = flipX;
+                }
+
+                mFlipX = flipX;
+
+                if (horizontalFlipGroup != null)
+                {
+                    horizontalFlipGroup.localScale = new Vector3(flipX ? -1 : 1, 1, 1);
+                }
+            }
         }
     }
 
@@ -157,6 +175,8 @@ public class Character : MonoBehaviour
 
     private void ChangeDirection(FacingDirection newDir)
     {
+        // this function, and facing direction, are seeming more and more useless?
+
         mFacingDirection = newDir;
         // transform.rotation = Quaternion.Euler(FACING_VECTORS[(int)newDir]); // not needed? if movement is not relative to facing direction        
     }

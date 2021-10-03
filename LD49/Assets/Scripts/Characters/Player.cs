@@ -171,8 +171,6 @@ public class Player : Character
     {
         if (mEmotion != Emotion.ANGRY) return;
 
-        Debug.Log("STOMP");
-
         Camera camera = Camera.main;
         CameraShake shake = camera.gameObject.GetComponent<CameraShake>();
         StartCoroutine(shake.Shake(0.15f, 0.025f));

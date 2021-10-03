@@ -13,6 +13,7 @@ public class QuadAnimator : MonoBehaviour
 
     private int mPrevNumSprites;
     private int mPrevSpriteIdx;
+    private bool mPrevFlipX;
     
     private Mesh mMesh;
     
@@ -30,6 +31,7 @@ public class QuadAnimator : MonoBehaviour
         mMesh.SetUVs(0, uvs);
         mPrevSpriteIdx = spriteIdx;
         mPrevNumSprites = numSprites;
+        mPrevFlipX = flipX;
     }
 
     void LateUpdate()
@@ -37,7 +39,7 @@ public class QuadAnimator : MonoBehaviour
         // if the material changes, unity seems to take one frame before it actually uses the new one
         // but it immediately uses any changes to the uvs.
         // so this is in late update so that the uv changes don't take effect until next frame, which is when the new material should be in use as well.
-        if ((spriteIdx != mPrevSpriteIdx) || (numSprites != mPrevNumSprites))
+        if ((spriteIdx != mPrevSpriteIdx) || (numSprites != mPrevNumSprites) || (flipX != mPrevFlipX))
         {
             spriteIdx = Mathf.Min(spriteIdx, numSprites - 1);
             float leftU = (float)spriteIdx / numSprites;
@@ -52,8 +54,10 @@ public class QuadAnimator : MonoBehaviour
             uvs[0].x = uvs[2].x = leftU;
             uvs[1].x = uvs[3].x = rightU;
             mMesh.SetUVs(0, uvs);
+
             mPrevSpriteIdx = spriteIdx;
             mPrevNumSprites = numSprites;
+            mPrevFlipX = flipX;
         }
     }
 }
