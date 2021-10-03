@@ -63,7 +63,7 @@ public class Character : MonoBehaviour
         // in air check
         mInAir = true;
         float capsuleHalfHeight = (mCapsule.height * 0.5f); // height is the entire capsule
-        RaycastHit[] onGroundHits = Physics.SphereCastAll(transform.position, mCapsule.radius, Vector3.down, capsuleHalfHeight - mCapsule.radius + 0.01f);
+        RaycastHit[] onGroundHits = Physics.SphereCastAll(transform.position, mCapsule.radius, Vector3.down, capsuleHalfHeight - mCapsule.radius + 0.01f, LayerMask.GetMask("Default"));
         foreach(RaycastHit hitInfo in onGroundHits)
         {
             if (hitInfo.collider.gameObject == gameObject) continue;
