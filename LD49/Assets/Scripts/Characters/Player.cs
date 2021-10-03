@@ -35,7 +35,7 @@ public class Player : Character
         {
             SetEmotion(Emotion.AFRAID);
         }
-        // Ignore food if already joyful. If food is consumed later, maybe change this to allow smitten for more food.
+        // Ignore food if already joyful. Maybe change this to allow smitten or angry for more food.
         else if (nearbyFood != null && GetEmotion() != Emotion.JOYFUL)
         {
             // The food is the child of the cat while the cat is carrying it

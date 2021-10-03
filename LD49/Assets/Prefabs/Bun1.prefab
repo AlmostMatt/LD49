@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emotion: 1
-  oneTimeUse: 0
+  oneTimeUse: 1
 --- !u!114 &4949394056811631320
 MonoBehaviour:
   m_ObjectHideFlags: 0
