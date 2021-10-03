@@ -61,7 +61,10 @@ public class Character : MonoBehaviour
         float capsuleHalfHeight = (mCapsule.height * 0.5f); // height includes radius?
         if (Physics.SphereCast(transform.position, mCapsule.radius, Vector3.down, out hitInfo, capsuleHalfHeight - mCapsule.radius + 0.01f))
         {
-            mInAir = false;
+            if (Vector3.Dot(hitInfo.normal, Vector3.up) > 0.3f) // don't count as on ground unless the collision is flat enough
+            {
+                mInAir = false;
+            }
         }
 
         // TODO - add mAnimator and mQuadAnimator to cat so that it can rotate like player
