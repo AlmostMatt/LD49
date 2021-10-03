@@ -16,8 +16,6 @@ public class RetryButton : MonoBehaviour
     // Triggered by R or by reset button click
     public void ResetLevel()
     {
-        // TODO - generalize this if we have additive scene loading
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name, LoadSceneMode.Single);
+        LevelManager.RestartCurrentLevel();
     }
 }

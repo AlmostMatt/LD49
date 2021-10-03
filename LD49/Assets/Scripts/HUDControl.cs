@@ -5,13 +5,21 @@ using UnityEngine.UI;
 
 public class HUDControl : MonoBehaviour
 {
+    private static bool shouldFadeOnAwake; // Matt - hacked in since FadeToBlack may be queued before this awakes
+
     private static HUDControl sSingleton;
     private Animator mAnimator;
     public Image splashScreen;
 
     public static void FadeToBlack()
     {
-        if (sSingleton != null) sSingleton._FadeToBlack();
+        if (sSingleton != null)
+        {
+            sSingleton._FadeToBlack();
+        } else
+        {
+            shouldFadeOnAwake = true;
+        }
     }
 
     public static void FadeFromBlack()
@@ -23,6 +31,10 @@ public class HUDControl : MonoBehaviour
     {
         sSingleton = this;
         mAnimator = GetComponent<Animator>();
+        if (shouldFadeOnAwake)
+        {
+            FadeToBlack();
+        }
     }
 
     // Start is called before the first frame update

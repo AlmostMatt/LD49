@@ -90,7 +90,11 @@ public class LevelManager : MonoBehaviour
     {
         if (GetSingleton() != null)
         {
-            LevelManager.GoToLevel(GetSingleton().mCurrentLevel);
+            string level = GetSingleton().mCurrentLevel;
+            // this null check may or may not stop restarts while a restart is in progress
+            if (level != null) {
+                LevelManager.GoToLevel(level);
+            }
         }
     }
 
@@ -104,6 +108,7 @@ public class LevelManager : MonoBehaviour
 
     private void GoToLevelInternal(string name, float delay)
     {
+        Debug.Log("Fading to black");
         HUDControl.FadeToBlack();
         mPendingLevel = name;
         mSceneLoadState = SceneLoadState.SLS_NEXT_SCENE_PENDING;
@@ -114,10 +119,11 @@ public class LevelManager : MonoBehaviour
     {
         if (mCurrentLevel == null)
         {
+            Debug.Log("UnLoad null - load pending level" + mCurrentLevel);
             LoadPendingLevel();
             return;
         }
-
+        Debug.Log("UnLoading scene " + mCurrentLevel);
         mSceneLoadState = SceneLoadState.SLS_UNLOADING;
         mCurrentLoadOp = SceneManager.UnloadSceneAsync(mCurrentLevel);
     }
@@ -136,6 +142,7 @@ public class LevelManager : MonoBehaviour
         }
 
         mSceneLoadState = SceneLoadState.SLS_LOADING;
+        Debug.Log("Begin Loading scene " + mPendingLevel);
         mCurrentLoadOp = SceneManager.LoadSceneAsync(mPendingLevel, LoadSceneMode.Additive);
         if (mCurrentLoadOp == null)
         {
@@ -157,7 +164,7 @@ public class LevelManager : MonoBehaviour
         }
 
         HUDControl.FadeFromBlack();
-        Debug.Log("Scene loaded");
+        Debug.Log("Loaded scene " + mCurrentLevel);
     }
 
     // Start is called before the first frame update
