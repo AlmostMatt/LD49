@@ -11,6 +11,7 @@ public class Player : Character
     private bool mAlternateFoot = false;
 
     private GameObject mMoodEnvironmentEffects;
+    private Vector2 mCurrentJumpDirection;
 
     public override void Update()
     {
@@ -69,7 +70,7 @@ public class Player : Character
             // totally different movement if happy and jumping
             if (CanJump())
             {
-                if (mAlternateFoot)
+                if (!mAlternateFoot)
                 {
                     // skip
                     Vector3 jumpForce = Vector3.up * jumpAccel * 0.6f;
@@ -77,6 +78,7 @@ public class Player : Character
                     mRigidbody.AddForce(jumpForce);
                     
                     DoDirectionalMovement(inputVector, true);
+                    mCurrentJumpDirection = inputVector;
                 }
                 else
                 {
@@ -86,11 +88,22 @@ public class Player : Character
                     mRigidbody.AddForce(jumpForce);
                     
                     DoDirectionalMovement(inputVector, true);
+                    mCurrentJumpDirection = inputVector;
                 }
                 
                 mAlternateFoot = !mAlternateFoot;
             }
+            else if (mInAir)
+            {
+                // make it so that we can jump onto a block that's right beside us
+                DoDirectionalMovement(mCurrentJumpDirection, true);
+            }
         }
+    }
+
+    protected override bool CanChangeDirection()
+    {
+        return !mInAir || mEmotion == Emotion.JOYFUL; // special case: can accelerate during a joyful jump
     }
 
     private bool ShouldJump()
@@ -109,6 +122,7 @@ public class Player : Character
         if (mEmotion == Emotion.JOYFUL)
         {
             mJumpCooldown = happyJumpTimer;
+            mAlternateFoot = false;
         }
 
         // environmental vfx

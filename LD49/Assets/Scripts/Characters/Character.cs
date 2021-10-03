@@ -57,13 +57,16 @@ public class Character : MonoBehaviour
     {
         // in air check
         mInAir = true;
-        RaycastHit hitInfo;
-        float capsuleHalfHeight = (mCapsule.height * 0.5f); // height includes radius?
-        if (Physics.SphereCast(transform.position, mCapsule.radius, Vector3.down, out hitInfo, capsuleHalfHeight - mCapsule.radius + 0.01f))
+        float capsuleHalfHeight = (mCapsule.height * 0.5f); // height is the entire capsule
+        RaycastHit[] onGroundHits = Physics.SphereCastAll(transform.position, mCapsule.radius, Vector3.down, capsuleHalfHeight - mCapsule.radius + 0.01f);
+        foreach(RaycastHit hitInfo in onGroundHits)
         {
+            if (hitInfo.collider.gameObject == gameObject) continue;
+
             if (Vector3.Dot(hitInfo.normal, Vector3.up) > 0.3f) // don't count as on ground unless the collision is flat enough
             {
                 mInAir = false;
+                break;
             }
         }
 
@@ -135,7 +138,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected bool CanChangeDirection()
+    protected virtual bool CanChangeDirection()
     {
         return !mInAir;
     }
