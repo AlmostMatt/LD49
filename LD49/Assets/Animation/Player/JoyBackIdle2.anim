@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: JoyIdle2
+  m_Name: JoyBackIdle2
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -58,7 +58,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 2100000, guid: 31ab69543ffcd974b81a531ba2367401, type: 2}
+      value: {fileID: 2100000, guid: 3e93c0afd74e0a3499f520a5d0d1dcdf, type: 2}
     attribute: m_Materials.Array.data[0]
     path: Quad
     classID: 23
@@ -92,7 +92,7 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     pptrCurveMapping:
-    - {fileID: 2100000, guid: 31ab69543ffcd974b81a531ba2367401, type: 2}
+    - {fileID: 2100000, guid: 3e93c0afd74e0a3499f520a5d0d1dcdf, type: 2}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

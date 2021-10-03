@@ -55,6 +55,7 @@ public class Character : MonoBehaviour
         if (mAnimator != null) {
             mAnimator.SetInteger("Emotion", (int)mEmotion);
             mAnimator.SetBool("InAir", mInAir);
+            mAnimator.SetInteger("FacingDirection", (int)mFacingDirection);
         }
     }
 
@@ -79,6 +80,7 @@ public class Character : MonoBehaviour
         if (mAnimator != null)
         {
             mAnimator.SetFloat("Speed", mRigidbody.velocity.magnitude);
+            mAnimator.SetBool("Falling", mRigidbody.velocity.y < 0f);
         }
 
         if (mRigidbody.velocity.x != 0)
@@ -175,10 +177,7 @@ public class Character : MonoBehaviour
 
     private void ChangeDirection(FacingDirection newDir)
     {
-        // this function, and facing direction, are seeming more and more useless?
-
         mFacingDirection = newDir;
-        // transform.rotation = Quaternion.Euler(FACING_VECTORS[(int)newDir]); // not needed? if movement is not relative to facing direction        
     }
 
     public virtual void SetEmotion(Emotion e)
