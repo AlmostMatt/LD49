@@ -59,7 +59,7 @@ public class Character : MonoBehaviour
         mInAir = true;
         RaycastHit hitInfo;
         float capsuleHalfHeight = (mCapsule.height * 0.5f); // height includes radius?
-        if (Physics.SphereCast(transform.position, mCapsule.radius, Vector3.down, out hitInfo, capsuleHalfHeight + 0.01f))
+        if (Physics.SphereCast(transform.position, mCapsule.radius, Vector3.down, out hitInfo, capsuleHalfHeight - mCapsule.radius + 0.01f))
         {
             mInAir = false;
         }
@@ -132,7 +132,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    private bool CanChangeDirection()
+    protected bool CanChangeDirection()
     {
         return !mInAir;
     }

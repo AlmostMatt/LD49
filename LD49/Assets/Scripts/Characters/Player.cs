@@ -25,6 +25,7 @@ public class Player : Character
 
     public override void FixedUpdate()
     {
+        bool prevInAir = mInAir;
         base.FixedUpdate();
         Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal") , Input.GetAxis("Vertical"));
         if (mEmotion != Emotion.JOYFUL)
@@ -33,16 +34,34 @@ public class Player : Character
         }
         else if (mEmotion == Emotion.JOYFUL)
         {
+            if (prevInAir != mInAir && !mInAir)
+            {
+                mJumpCooldown = happyJumpTimer;
+            }
+
             // totally different movement if happy and jumping
             if (CanJump())
             {
-                Vector3 jumpForce = Vector3.up * jumpAccel;
-                mRigidbody.velocity = Vector3.zero;
-                mRigidbody.AddForce(jumpForce);
-                mJumpCooldown = happyJumpTimer;
+                if (mAlternateFoot)
+                {
+                    // skip
+                    Vector3 jumpForce = Vector3.up * jumpAccel * 0.6f;
+                    mRigidbody.velocity = Vector3.zero;
+                    mRigidbody.AddForce(jumpForce);
+                    
+                    DoDirectionalMovement(inputVector, true);
+                }
+                else
+                {
+                    // jump
+                    Vector3 jumpForce = Vector3.up * jumpAccel;
+                    mRigidbody.velocity = Vector3.zero;
+                    mRigidbody.AddForce(jumpForce);
+                    
+                    DoDirectionalMovement(inputVector, true);
+                }
+                
                 mAlternateFoot = !mAlternateFoot;
-
-                DoDirectionalMovement(inputVector, true);
             }
         }
     }
