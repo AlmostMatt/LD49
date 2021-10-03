@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HUDControl : MonoBehaviour
 {
     private static HUDControl sSingleton;
     private Animator mAnimator;
+    public Image splashScreen;
 
     public static void FadeToBlack()
     {
@@ -42,6 +44,8 @@ public class HUDControl : MonoBehaviour
 
     private void _FadeFromBlack()
     {
+        // Hide the splash screen the first time that we fade from black.
+        splashScreen.enabled = false;
         mAnimator.SetTrigger("FadeFromBlack");
     }
 }
