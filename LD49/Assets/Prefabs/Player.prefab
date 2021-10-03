@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1382373424940968670}
   - component: {fileID: 2738695572052908380}
   - component: {fileID: 278880231}
-  m_Layer: 2
+  m_Layer: 9
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 6686201163283154087}
   - component: {fileID: 6686201163283154106}
   - component: {fileID: 598265614}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,6 +213,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EmotionEffect (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2841208033597391921, guid: 4e089a97117216d4296a766a6082b938,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7217624579564069879, guid: 4e089a97117216d4296a766a6082b938,
         type: 3}
       propertyPath: m_RootOrder
@@ -298,6 +303,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EmotionEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 2841208033597391921, guid: 4e089a97117216d4296a766a6082b938,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7217624579564069879, guid: 4e089a97117216d4296a766a6082b938,
         type: 3}
       propertyPath: m_RootOrder
@@ -372,6 +382,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlobShadowProjector
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -422,7 +436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11900000, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
       propertyPath: m_IgnoreLayers.m_Bits
-      value: 4
+      value: 772
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 3}
@@ -443,6 +457,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EmotionEffect (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841208033597391921, guid: 4e089a97117216d4296a766a6082b938,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7217624579564069879, guid: 4e089a97117216d4296a766a6082b938,
         type: 3}
