@@ -18,6 +18,8 @@ public static class EmotionExtensions
     {
         switch(e)
         {
+            case Emotion.AFRAID:
+                return 5f;
             case Emotion.JOYFUL:
                 return 2f;
             default:
