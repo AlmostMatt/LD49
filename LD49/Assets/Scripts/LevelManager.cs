@@ -42,7 +42,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public static void LevelFinished()
+    public static LevelManager GetSingleton()
     {
         if (sLevelManagerSingleton == null)
         {
@@ -51,10 +51,18 @@ public class LevelManager : MonoBehaviour
             {
                 sLevelManagerSingleton = levelManager.GetComponent<LevelManager>();
             }
-        }
-        if (sLevelManagerSingleton != null) // could still be null if running directly in a level (instead of from the main scene)
+        } else
         {
-            sLevelManagerSingleton.LevelFinishedInternal();
+            Debug.LogWarning("Unable to find level manager");
+        }
+        return sLevelManagerSingleton;
+    }
+
+    public static void LevelFinished()
+    {
+        if (GetSingleton() != null) // could still be null if running directly in a level (instead of from the main scene)
+        {
+            GetSingleton().LevelFinishedInternal();
         }
     }
 
@@ -78,13 +86,20 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public static void RestartCurrentLevel()
+    {
+        if (GetSingleton() != null)
+        {
+            LevelManager.GoToLevel(GetSingleton().mCurrentLevel);
+        }
+    }
+
     public static void GoToLevel(string name)
     {
-        if (sLevelManagerSingleton == null)
+        if (GetSingleton() != null)
         {
-            sLevelManagerSingleton = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+            sLevelManagerSingleton.GoToLevelInternal(name, 0.2f);
         }
-        sLevelManagerSingleton.GoToLevelInternal(name, 0.2f);
     }
 
     private void GoToLevelInternal(string name, float delay)
