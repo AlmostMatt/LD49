@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BrendanLevelTest.unity
     guid: afdc96c89fa15ef4a9ddde18e08ec118
+  - enabled: 1
+    path: Assets/Scenes/Levels/BasicMovement.unity
+    guid: 2946926447f51bb44a41c43e1e7360dc
   m_configObjects: {}
