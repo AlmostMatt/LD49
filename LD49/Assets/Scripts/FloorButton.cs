@@ -24,6 +24,7 @@ public class FloorButton : MonoBehaviour
             {
                 go.BroadcastMessage("OnTriggerButtonPressed");
             }
+            SFXPlayer.PlayAudioClip("button_down");
 
             mButtonObject.localPosition = new Vector3(0, 0, 0);
         }

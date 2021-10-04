@@ -149,6 +149,8 @@ MonoBehaviour:
     AudioClip: {fileID: 8300000, guid: 57fff93e8a679634f9aabca333348421, type: 3}
   - name: break_plant
     AudioClip: {fileID: 8300000, guid: 295d85ba49c3f944096cb5a495e6faa5, type: 3}
+  - name: button_down
+    AudioClip: {fileID: 8300000, guid: a26e2af39157ccf40afa43e6271eb2df, type: 3}
   namedAudioClips2:
   - name: joy_voice
     AudioClip: {fileID: 8300000, guid: c3d35c1c53bc26445aa19a98eafc1cb0, type: 3}
