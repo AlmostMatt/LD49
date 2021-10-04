@@ -11,6 +11,7 @@ public class LevelFinishedTrigger : MonoBehaviour
         {
             Debug.Log("Level finished!");
             LevelManager.LevelFinished();
+            gameObject.SetActive(false);
         }
     }
 
