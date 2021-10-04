@@ -313,6 +313,11 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1494587570744039629, guid: 0cb37d17725bb984a859f395b925ee98,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1494587572440685498, guid: 0cb37d17725bb984a859f395b925ee98,
         type: 3}
       propertyPath: m_Pivot.x
