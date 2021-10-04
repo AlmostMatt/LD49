@@ -277,8 +277,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   namedAudioClips1:
   - name: stomp
-    AudioClip: {fileID: 8300000, guid: 261658b7435b3bb48b092cd32fe3fc02, type: 3}
-  namedAudioClips2: []
+    AudioClip: {fileID: 0}
+  namedAudioClips2:
+  - name: joy_voice
+    AudioClip: {fileID: 8300000, guid: c3d35c1c53bc26445aa19a98eafc1cb0, type: 3}
+  - name: fear_voice
+    AudioClip: {fileID: 8300000, guid: 624f1694ab2b06147a49591d70794536, type: 3}
+  - name: angry_voice
+    AudioClip: {fileID: 8300000, guid: ac957a35dd479ac449dcf9f276846c47, type: 3}
+  - name: smitten_voice
+    AudioClip: {fileID: 8300000, guid: e7be2e6e96118614e8449d8479c5dba1, type: 3}
   namedAudioClips3: []
 --- !u!1001 &150265694597858209
 PrefabInstance:
