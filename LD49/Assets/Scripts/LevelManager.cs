@@ -51,10 +51,13 @@ public class LevelManager : MonoBehaviour
             {
                 sLevelManagerSingleton = levelManager.GetComponent<LevelManager>();
             }
-        } else
+        }
+
+        if (sLevelManagerSingleton == null)
         {
             Debug.LogWarning("Unable to find level manager");
         }
+
         return sLevelManagerSingleton;
     }
 
