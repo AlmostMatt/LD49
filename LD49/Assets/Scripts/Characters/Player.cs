@@ -197,6 +197,18 @@ public class Player : Character
                 // For now this has no effect on speed.
             }
         }
+        // Don't exceed max speed (relevant for the push force from nearby angry cat)
+        // Also relevant for change-in-state to immediately slow down
+        Vector2 v = new Vector2(mRigidbody.velocity.x, mRigidbody.velocity.z);
+        float maxSpeed = GetMaxSpeed(v);
+        if (v.magnitude > maxSpeed)
+        {
+            float oldSpeed = v.magnitude;
+            v = maxSpeed * v.normalized;
+            float newSpeed = v.magnitude;
+            mRigidbody.velocity = new Vector3(v.x, mRigidbody.velocity.y, v.y);
+            // Debug.Log("Capping speed. Was " + oldSpeed + ", now " + newSpeed);
+        }
     }
 
     protected override bool CanChangeDirection()
