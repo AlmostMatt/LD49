@@ -61,14 +61,25 @@ public class MusicPlayer : MonoBehaviour
     {
         if (sSingleton == null || !sSingleton.gameObject.activeInHierarchy)
         {
-            sSingleton = GameObject.FindObjectsOfType<MusicPlayer>()[0];
+            MusicPlayer[] objs = GameObject.FindObjectsOfType<MusicPlayer>();
+            if (objs.Length > 0)
+            {
+                sSingleton = objs[0];
+            } else
+            {
+                Debug.LogWarning("Unable to find music player");
+            }
         }
         return sSingleton;
     }
 
     public static void FadeOut()
     {
-        GetSingleton()._FadeOut();
+        MusicPlayer mp = GetSingleton();
+        if (mp != null)
+        {
+            mp._FadeOut();
+        }
     }
     private void _FadeOut()
     {
@@ -77,7 +88,11 @@ public class MusicPlayer : MonoBehaviour
 
     public static void StartPlaying(string music)
     {
-        GetSingleton()._Start(music);
+        MusicPlayer mp = GetSingleton();
+        if (mp != null)
+        {
+            mp._Start(music);
+        }
     }
 
     private void _Start(string music)
