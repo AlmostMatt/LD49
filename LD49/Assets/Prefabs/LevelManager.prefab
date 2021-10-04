@@ -47,9 +47,11 @@ MonoBehaviour:
   hubLevel: 
   scenes:
   - BunJump
+  - LearnToJump
   - AvoidBuns
   - FearCat
   - FastFear
   - AngryDueToCat
   - AngrySmash
   - AngryChase
+  - BunHeaven
