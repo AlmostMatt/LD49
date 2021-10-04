@@ -20,6 +20,8 @@ public class Character : MonoBehaviour
         Vector3.left
     };
 
+    public float emotionChangeCooldown = 1f;
+
     public float normalMoveMaxSpeed = 5f;
     public float normalMoveAccel = 50f;
     public float jumpAccel = 10f;
@@ -27,6 +29,7 @@ public class Character : MonoBehaviour
     public Transform horizontalFlipGroup; // any stuff that should be mirrored when moving left
 
     public Emotion mEmotion = Emotion.NEUTRAL; // change in editor to test a different starting emotion
+    private float mEmotionChangeCooldownTimer = 0f;
     protected Rigidbody mRigidbody;
     protected bool mInAir = false;
 
@@ -56,6 +59,11 @@ public class Character : MonoBehaviour
             mAnimator.SetInteger("Emotion", (int)mEmotion);
             mAnimator.SetBool("InAir", mInAir);
             mAnimator.SetInteger("FacingDirection", (int)mFacingDirection);
+        }
+
+        if (mEmotionChangeCooldownTimer > 0f)
+        {
+            mEmotionChangeCooldownTimer -= Time.deltaTime;
         }
     }
 
@@ -186,6 +194,16 @@ public class Character : MonoBehaviour
 
     public virtual void SetEmotion(Emotion e, bool initial = false)
     {
+        if (!initial)
+        {
+            if (mEmotionChangeCooldownTimer > 0f && e != Emotion.JOYFUL) // can't really delay picking up a bun, so joy bypasses cooldown
+            {
+                return;
+            }
+
+            mEmotionChangeCooldownTimer = emotionChangeCooldown;
+        }
+
         mEmotion = e;
         foreach (EmotionEffect effect in GetComponentsInChildren<EmotionEffect>())
         {

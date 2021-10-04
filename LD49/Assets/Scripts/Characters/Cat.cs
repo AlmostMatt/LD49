@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Cat : Character
 {
     private float foodVisionRadius = 3f; // Other object collider radius is added to this
-    private float playerVisionRadius = 2f; // Other object collider radius is added to this
+    private float playerVisionRadius = 3f; // Other object collider radius is added to this
     private float fleeRadius = 4f; // Does not include other object collider radius.
     public Transform foodAttachPoint;
 

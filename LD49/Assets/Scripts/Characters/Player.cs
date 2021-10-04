@@ -16,7 +16,7 @@ public class Player : Character
     private Vector2 mCurrentJumpDirection;
     private Vector3? mAttraction;
     private Vector3? mThreat;
-
+    
     public override void Update()
     {
         base.Update();
