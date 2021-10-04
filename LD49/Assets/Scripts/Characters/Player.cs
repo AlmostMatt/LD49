@@ -86,9 +86,13 @@ public class Player : Character
         float deltaDistance = delta.magnitude;
         if (GetEmotion() == Emotion.SMITTEN)
         {
-            // At a distance of 0, pull player away equal to 2x their accel
-            // At a distance of visionRadius, do not pull at all (0)
-            return Mathf.Max(0f, foodVisionRadius - deltaDistance) / foodVisionRadius;
+            // At a distance of 0.5, pull player away with full force (1)
+            // At a distance of just below visionRadius, pull with a low force (0.25)
+            float minDist = 0.5f;
+            float maxDist = foodVisionRadius;
+            if (deltaDistance > maxDist) { return 0f;  }
+            float minForce = 0.25f;
+            return minForce + (1-minForce)*(Mathf.Max(minDist, maxDist - deltaDistance) - minDist) / (maxDist - minDist);
         } else if (GetEmotion() == Emotion.ANGRY)
         {
             // TODO (attraction to cat?)
@@ -184,7 +188,7 @@ public class Player : Character
             // Smitten with bun
             if (GetEmotion() == Emotion.SMITTEN)
             {
-                float attrAmount = 2f * attractionStrength;
+                float attrAmount = 0.9f * attractionStrength;
                 mRigidbody.AddForce(attrAmount * GetAccel() * towardAttraction.normalized);
             }
             // Mad at cat with bun

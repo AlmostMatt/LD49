@@ -24,6 +24,8 @@ public static class EmotionExtensions
                 return 2f;
             case Emotion.ANGRY:
                 return 2.5f;
+            case Emotion.SMITTEN:
+                return 2f;
             default:
                 return 3f;
         }
