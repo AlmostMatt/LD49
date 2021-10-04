@@ -5,8 +5,9 @@ using UnityEngine.AI;
 
 public class Cat : Character
 {
-    public float visionRadius = 3f; // Other object collider radius is added to this
-    public float fleeRadius = 4f; // Does not include other object collider radius.
+    private float foodVisionRadius = 3f; // Other object collider radius is added to this
+    private float playerVisionRadius = 2f; // Other object collider radius is added to this
+    private float fleeRadius = 4f; // Does not include other object collider radius.
     public Transform foodAttachPoint;
 
     private Food mCurrentlyHeldFood = null;
@@ -30,9 +31,9 @@ public class Cat : Character
         Food nearbyFood = null;
         if (mCurrentlyHeldFood == null && !mRecentlyDroppedFood)
         {
-            nearbyFood = ObjectInRangeOrNull<Food>(visionRadius);
+            nearbyFood = ObjectInRangeOrNull<Food>(foodVisionRadius);
         }
-        Player nearbyPlayer = ObjectInRangeOrNull<Player>(visionRadius);
+        Player nearbyPlayer = ObjectInRangeOrNull<Player>(playerVisionRadius);
         // If recently dropped food, run away!
         if (mRecentlyDroppedFood)
         {
