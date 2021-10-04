@@ -86,12 +86,17 @@ public class Player : Character
         float deltaDistance = delta.magnitude;
         if (GetEmotion() == Emotion.SMITTEN)
         {
-            // TODO (attraction to food)
-            return 1f;
+            // At a distance of 0.5, pull player away with full force (1)
+            // At a distance of just below visionRadius, pull with a low force (0.25)
+            float minDist = 0.5f;
+            float maxDist = foodVisionRadius;
+            if (deltaDistance > maxDist) { return 0f;  }
+            float minForce = 0.25f;
+            return minForce + (1-minForce)*(Mathf.Max(minDist, maxDist - deltaDistance) - minDist) / (maxDist - minDist);
         } else if (GetEmotion() == Emotion.ANGRY)
         {
             // TODO (attraction to cat?)
-            return 1f;
+            return 0f;
         }
         return 0f;
     }
@@ -105,8 +110,15 @@ public class Player : Character
         }
         // The only possible threat (for a player) is a cat.
         // TODO (fear of cat)
-        return 1f;
+
+        // At a distance of 0, push player away equal to their accel
+        // At a distance of visionRadius, do not push at all (0)
+        Vector2 delta = GetDistance2D(mThreat);
+        float threatDistance = delta.magnitude;
+        float angryCatRepulsionRadius = 3f;
+        float repulsionFromDistance = Mathf.Max(0f, angryCatRepulsionRadius - threatDistance) / angryCatRepulsionRadius;
         // TODO (linear or quadratic interpolation based on proximity and parameters)
+        return repulsionFromDistance;
     }
 
     public override void FixedUpdate()
@@ -164,13 +176,8 @@ public class Player : Character
             float threatStrength = GetThreatStrength();
             Vector3 awayFromThreat = transform.position - mThreat.Value;
             awayFromThreat.y = 0;
-            float threatDistance = awayFromThreat.magnitude;
             // Afraid of cat
-            // At a distance of 0, push player away equal to their accel
-            // At a distance of visionRadius, do not push at all (0)
-            float angryCatRepulsionRadius = 3f;
-            float repulsionFromDistance = Mathf.Max(0f, angryCatRepulsionRadius - threatDistance) / angryCatRepulsionRadius;
-            float repulsionAmount = 1f * threatStrength * repulsionFromDistance;
+            float repulsionAmount = 1f * threatStrength;
             mRigidbody.AddForce(repulsionAmount * GetAccel() * awayFromThreat.normalized);
         }
         if (mAttraction.HasValue)
@@ -178,14 +185,10 @@ public class Player : Character
             float attractionStrength = GetAttractionStrength();
             Vector3 towardAttraction = mAttraction.Value - transform.position;
             towardAttraction.y = 0;
-            float attractionDistance = towardAttraction.magnitude;
             // Smitten with bun
             if (GetEmotion() == Emotion.SMITTEN)
             {
-                // At a distance of 0, pull player away equal to 2x their accel
-                // At a distance of visionRadius, do not pull at all (0)
-                float attrFromDistance = Mathf.Max(0f, foodVisionRadius - attractionDistance) / foodVisionRadius;
-                float attrAmount = 2f * attractionStrength * attrFromDistance;
+                float attrAmount = 0.95f * attractionStrength;
                 mRigidbody.AddForce(attrAmount * GetAccel() * towardAttraction.normalized);
             }
             // Mad at cat with bun
@@ -244,6 +247,7 @@ public class Player : Character
         return baseSpeed;
     }
 
+    // Note that this method can trigger repeatedly, even if this is already the current emotion.
     public override void SetEmotion(Emotion e)
     {
         base.SetEmotion(e);
@@ -254,24 +258,27 @@ public class Player : Character
         }
 
         // trigger scripted level events, if any
-        ScriptedLevelEvents.Trigger(mEmotion);        
+        ScriptedLevelEvents.Trigger(mEmotion);
 
         // environmental vfx
-        if (mMoodEnvironmentEffects != null)
-        {
-            mMoodEnvironmentEffects.SetActive(false);
-        }
-
+        GameObject newMoodEnvEffects = null;
         string moodTag = mEmotion.GetMoodTag();
         if (moodTag != null)
         {
             GameObject rootObj = GameObject.FindWithTag(moodTag);
             if (rootObj != null)
             {
-                mMoodEnvironmentEffects = rootObj.transform.GetChild(0).gameObject;
-                mMoodEnvironmentEffects.SetActive(true);
+                // Turn on new mood effects
+                newMoodEnvEffects = rootObj.transform.GetChild(0).gameObject;
+                newMoodEnvEffects.SetActive(true);
             }
         }
+        // Turn off old mood effects and update the current mood effects variable
+        if (mMoodEnvironmentEffects != null && mMoodEnvironmentEffects != newMoodEnvEffects)
+        {
+            mMoodEnvironmentEffects.SetActive(false);
+        }
+        mMoodEnvironmentEffects = newMoodEnvEffects;
     }
 
     public void OnCollisionEnter(Collision collision)
