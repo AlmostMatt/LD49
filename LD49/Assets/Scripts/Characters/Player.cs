@@ -364,31 +364,34 @@ public class Player : Character
         {
             // trigger scripted level events, if any (but not if this is the emotion we started the level with)
             ScriptedLevelEvents.Trigger(mEmotion);
-            // TODO - consider playing emotion sounds at start of level too (or at start of game)
-            if (e != prevEmotion)
+        }
+
+        if (e != prevEmotion || initial)
+        {
+            // Play audio effects for change of emotion
+            if (e == Emotion.JOYFUL)
             {
-                // Play audio effects for change of emotion
-                if (e == Emotion.JOYFUL)
-                {
-                    SFXPlayer.PlayAudioClip("joy_voice");
-                    MusicPlayer.FadeOut();
-                }
-                else if (e == Emotion.AFRAID)
-                {
-                    SFXPlayer.PlayAudioClip("fear_voice");
-                    MusicPlayer.FadeOut();
-                }
-                else if (e == Emotion.ANGRY)
-                {
-                    SFXPlayer.PlayAudioClip("angry_voice");
-                    MusicPlayer.FadeOut();
-                    MusicPlayer.StartPlaying("AngryTheme");
-                }
-                else if (e == Emotion.SMITTEN)
-                {                    
-                    SFXPlayer.PlayAudioClip("smitten_voice");
-                    MusicPlayer.FadeOut();
-                }
+                SFXPlayer.PlayAudioClip("joy_voice");
+                MusicPlayer.FadeOut();
+                MusicPlayer.StartPlaying("JoyTheme");
+            }
+            else if (e == Emotion.AFRAID)
+            {
+                SFXPlayer.PlayAudioClip("fear_voice");
+                MusicPlayer.FadeOut();
+                MusicPlayer.StartPlaying("FearTheme");
+            }
+            else if (e == Emotion.ANGRY)
+            {
+                SFXPlayer.PlayAudioClip("angry_voice");
+                MusicPlayer.FadeOut();
+                MusicPlayer.StartPlaying("AngryTheme");
+            }
+            else if (e == Emotion.SMITTEN)
+            {                    
+                SFXPlayer.PlayAudioClip("smitten_voice");
+                MusicPlayer.FadeOut();
+                MusicPlayer.StartPlaying("SmittenTheme");
             }
         }
 
