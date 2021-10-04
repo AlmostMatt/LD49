@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: JoySideIdle2
+  m_Name: JoySideFall1
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -22,35 +22,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 4
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 69
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.016666668
-        value: 4
-        inSlope: -0
-        outSlope: 0
-        tangentMode: 69
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: numSprites
-    path: Quad
-    classID: 114
-    script: {fileID: 11500000, guid: b87539f8c1fb6794dbd63be42888ad2e, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 3
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 69
@@ -61,6 +33,34 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: spriteIdx
+    path: Quad
+    classID: 114
+    script: {fileID: 11500000, guid: b87539f8c1fb6794dbd63be42888ad2e, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 6
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 69
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.016666668
+        value: 6
+        inSlope: -0
+        outSlope: 0
+        tangentMode: 69
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: numSprites
     path: Quad
     classID: 114
     script: {fileID: 11500000, guid: b87539f8c1fb6794dbd63be42888ad2e, type: 3}
@@ -88,14 +88,14 @@ AnimationClip:
       isPPtrCurve: 1
     - serializedVersion: 2
       path: 922149575
-      attribute: 2200167776
+      attribute: 4157949282
       script: {fileID: 11500000, guid: b87539f8c1fb6794dbd63be42888ad2e, type: 3}
       typeID: 114
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
       path: 922149575
-      attribute: 4157949282
+      attribute: 2200167776
       script: {fileID: 11500000, guid: b87539f8c1fb6794dbd63be42888ad2e, type: 3}
       typeID: 114
       customType: 0
@@ -128,35 +128,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 4
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 69
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.016666668
-        value: 4
-        inSlope: -0
-        outSlope: 0
-        tangentMode: 69
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: numSprites
-    path: Quad
-    classID: 114
-    script: {fileID: 11500000, guid: b87539f8c1fb6794dbd63be42888ad2e, type: 3}
-  - curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 3
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 69
@@ -167,6 +139,34 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: spriteIdx
+    path: Quad
+    classID: 114
+    script: {fileID: 11500000, guid: b87539f8c1fb6794dbd63be42888ad2e, type: 3}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 6
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 69
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.016666668
+        value: 6
+        inSlope: -0
+        outSlope: 0
+        tangentMode: 69
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: numSprites
     path: Quad
     classID: 114
     script: {fileID: 11500000, guid: b87539f8c1fb6794dbd63be42888ad2e, type: 3}
