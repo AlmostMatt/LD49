@@ -371,18 +371,23 @@ public class Player : Character
                 if (e == Emotion.JOYFUL)
                 {
                     SFXPlayer.PlayAudioClip("joy_voice");
+                    MusicPlayer.FadeOut();
                 }
                 else if (e == Emotion.AFRAID)
                 {
                     SFXPlayer.PlayAudioClip("fear_voice");
+                    MusicPlayer.FadeOut();
                 }
                 else if (e == Emotion.ANGRY)
                 {
                     SFXPlayer.PlayAudioClip("angry_voice");
+                    MusicPlayer.FadeOut();
+                    MusicPlayer.StartPlaying("AngryTheme");
                 }
                 else if (e == Emotion.SMITTEN)
-                {
+                {                    
                     SFXPlayer.PlayAudioClip("smitten_voice");
+                    MusicPlayer.FadeOut();
                 }
             }
         }
