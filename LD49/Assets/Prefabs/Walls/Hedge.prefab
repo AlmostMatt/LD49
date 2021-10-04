@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6245733734157971528}
   - component: {fileID: 5947881632303409096}
   - component: {fileID: 2994106635775049178}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 1062236585065649535}
   - component: {fileID: 2464764421216448175}
   - component: {fileID: 260001125434095176}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 5742855377747085919}
   - component: {fileID: 2517720618396491708}
   - component: {fileID: 246904713496155851}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 3098902475851145234}
   - component: {fileID: 7753451543400774416}
   - component: {fileID: 7655982212766265055}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Hedge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 2091627208490737099}
   - component: {fileID: 1892419050132642520}
   - component: {fileID: 7896681017201894523}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 1361518103451428393}
   - component: {fileID: 3768837037920667892}
   - component: {fileID: 2421022820959027797}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
