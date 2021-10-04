@@ -127,6 +127,9 @@ public class Player : Character
             mAlternateFoot = false;
         }
 
+        // trigger scripted level events, if any
+        ScriptedLevelEvents.Trigger(mEmotion);        
+
         // environmental vfx
         if (mMoodEnvironmentEffects != null)
         {
