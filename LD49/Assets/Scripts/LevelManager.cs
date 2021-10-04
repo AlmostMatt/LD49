@@ -96,16 +96,16 @@ public class LevelManager : MonoBehaviour
             string level = GetSingleton().mCurrentLevel;
             // this null check may or may not stop restarts while a restart is in progress
             if (level != null) {
-                LevelManager.GoToLevel(level);
+                LevelManager.GoToLevel(level, 2f);
             }
         }
     }
 
-    public static void GoToLevel(string name)
+    public static void GoToLevel(string name, float delay=0.2f)
     {
         if (GetSingleton() != null)
         {
-            sLevelManagerSingleton.GoToLevelInternal(name, 0.2f);
+            sLevelManagerSingleton.GoToLevelInternal(name, delay);
         }
     }
 
