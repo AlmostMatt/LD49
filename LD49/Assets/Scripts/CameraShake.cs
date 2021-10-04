@@ -25,4 +25,19 @@ public class CameraShake : MonoBehaviour
 
         transform.localPosition = originalPos;
     }
+
+    public IEnumerator ZoomOut(float duration, float zoomSpeed)
+    {
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            GetComponent<Camera>().orthographicSize += zoomSpeed * Time.deltaTime;
+
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+    }
+
 }
