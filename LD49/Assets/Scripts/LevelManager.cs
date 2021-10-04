@@ -140,9 +140,17 @@ public class LevelManager : MonoBehaviour
 
         if (mOpeningLevelCamera != null)
         {
+            // disable main scene camera -- have to do before loading because loading apparently ticks the scene a bit before we can disable the camera
+            mOpeningLevelCamera.gameObject.SetActive(false);
+        }
+
+        /*
+        if (mOpeningLevelCamera != null)
+        {
             // reenable original camera while no other scenes are loaded
             mOpeningLevelCamera.gameObject.SetActive(true);
         }
+        */
 
         mSceneLoadState = SceneLoadState.SLS_LOADING;
         Debug.Log("Begin Loading scene " + mPendingLevel);
@@ -159,13 +167,7 @@ public class LevelManager : MonoBehaviour
         mCurrentLevel = mPendingLevel;
         mPendingLevel = null;
         mSceneLoadState = SceneLoadState.SLS_LOADED;
-
-        if (mOpeningLevelCamera != null)
-        {
-            // disable main scene camera when the new scene is here
-            mOpeningLevelCamera.gameObject.SetActive(false);
-        }
-
+     
         HUDControl.FadeFromBlack();
         Debug.Log("Loaded scene " + mCurrentLevel);
     }
