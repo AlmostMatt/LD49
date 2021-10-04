@@ -310,6 +310,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   break_sound: break_hedge
+  explosionParticles: {fileID: 3305880407260319365, guid: 1012804e313f80941bb93068fdb3dfd1,
+    type: 3}
 --- !u!208 &7655982212766265055
 NavMeshObstacle:
   m_ObjectHideFlags: 0

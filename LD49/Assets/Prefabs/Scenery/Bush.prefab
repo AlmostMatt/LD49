@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   break_sound: break_plant
+  explosionParticles: {fileID: 3305880407260319365, guid: 1012804e313f80941bb93068fdb3dfd1,
+    type: 3}
 --- !u!1 &6474951967964508929
 GameObject:
   m_ObjectHideFlags: 0

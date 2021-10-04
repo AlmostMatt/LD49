@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Breakable : MonoBehaviour
 {
     public string break_sound;
+    public GameObject explosionParticles;
 
     private bool mIsBroken = false;
 
@@ -34,6 +35,10 @@ public class Breakable : MonoBehaviour
         if (break_sound != "")
         {
             SFXPlayer.PlayAudioClip(break_sound);
+        }
+        if (explosionParticles != null)
+        {
+            Instantiate(explosionParticles, transform.position, Quaternion.identity);
         }
     }
 }

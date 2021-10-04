@@ -232,6 +232,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   break_sound: break_wood
+  explosionParticles: {fileID: 533335430717422374, guid: 7b83e120884e48341928a5b066d76df0,
+    type: 3}
 --- !u!208 &3576069685317773076
 NavMeshObstacle:
   m_ObjectHideFlags: 0
