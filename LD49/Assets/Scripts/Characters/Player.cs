@@ -188,7 +188,7 @@ public class Player : Character
             // Smitten with bun
             if (GetEmotion() == Emotion.SMITTEN)
             {
-                float attrAmount = 0.9f * attractionStrength;
+                float attrAmount = 0.95f * attractionStrength;
                 mRigidbody.AddForce(attrAmount * GetAccel() * towardAttraction.normalized);
             }
             // Mad at cat with bun
