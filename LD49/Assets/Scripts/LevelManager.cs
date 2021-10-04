@@ -208,5 +208,13 @@ public class LevelManager : MonoBehaviour
                 LevelDoneLoading();
             }
         }
+
+
+        
+        // plop esc to quit here
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 }
