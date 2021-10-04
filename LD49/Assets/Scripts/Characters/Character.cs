@@ -88,7 +88,9 @@ public class Character : MonoBehaviour
         // TODO - add mAnimator and mQuadAnimator to cat so that it can rotate like player
         if (mAnimator != null)
         {
-            mAnimator.SetFloat("Speed", mRigidbody.velocity.magnitude);
+            Vector3 vel = mRigidbody.velocity;
+            vel.y = 0f;
+            mAnimator.SetFloat("Speed", vel.magnitude);
             mAnimator.SetBool("Falling", mRigidbody.velocity.y < 0f);
         }
 
@@ -118,7 +120,7 @@ public class Character : MonoBehaviour
         float vert = inputVector.y;
 
         FacingDirection desiredFacingDirection = mFacingDirection;
-        if (horz != 0)
+        if (Mathf.Abs(horz) > 0.02f)
         {
             if (horz > 0)
             {
@@ -129,8 +131,10 @@ public class Character : MonoBehaviour
                 desiredFacingDirection = FacingDirection.WEST;
             }
         }
-
-        if (vert != 0)
+        
+        // For player, any vertical is sufficient to show vertical
+        // For cat, only use vertical if mostly vertical (especially for back view)
+        if (Mathf.Abs(vert) > 0.02f && Mathf.Abs(vert) >= Mathf.Abs(horz))
         {
             if (vert > 0)
             {
