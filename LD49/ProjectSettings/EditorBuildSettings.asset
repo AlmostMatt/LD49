@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/FastFear.unity
     guid: 9a261902af628e046876dbf799f0034b
+  - enabled: 1
+    path: Assets/Scenes/Levels/AngrySmash.unity
+    guid: 96cc485fc1cb6db459a535a01f3bd508
   m_configObjects: {}
