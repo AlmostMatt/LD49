@@ -231,6 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52cfc88a858c4b46855fddeb52b8bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  break_sound: break_wood
 --- !u!208 &3576069685317773076
 NavMeshObstacle:
   m_ObjectHideFlags: 0

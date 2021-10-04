@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Breakable : MonoBehaviour
 {
+    public string break_sound;
+
     private bool mIsBroken = false;
 
     public void Break()
@@ -28,6 +30,10 @@ public class Breakable : MonoBehaviour
         foreach (NavMeshObstacle obstacle in GetComponentsInChildren<NavMeshObstacle>())
         {
             obstacle.enabled = false;
+        }
+        if (break_sound != "")
+        {
+            SFXPlayer.PlayAudioClip(break_sound);
         }
     }
 }

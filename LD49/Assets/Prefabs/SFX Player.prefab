@@ -143,6 +143,10 @@ MonoBehaviour:
   namedAudioClips1:
   - name: stomp
     AudioClip: {fileID: 8300000, guid: 4a73e7e91f62070428dfe266446ec24e, type: 3}
+  - name: break_wood
+    AudioClip: {fileID: 8300000, guid: 86d163afeebc58341864b015f286d181, type: 3}
+  - name: break_hedge
+    AudioClip: {fileID: 8300000, guid: 86d163afeebc58341864b015f286d181, type: 3}
   namedAudioClips2:
   - name: joy_voice
     AudioClip: {fileID: 8300000, guid: c3d35c1c53bc26445aa19a98eafc1cb0, type: 3}
