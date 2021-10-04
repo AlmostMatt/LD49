@@ -103,7 +103,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    protected void DoDirectionalMovement(Vector2 inputVector, bool instantAcceleration=false)
+    protected void DoDirectionalMovement(Vector2 inputVector, bool instantAcceleration = false)
     {
         float horz = inputVector.x;
         float vert = inputVector.y;
@@ -144,7 +144,7 @@ public class Character : MonoBehaviour
             Vector3 desiredVelocity = Vector3.zero;
             if (desiredDir.magnitude > 0)
             {
-                desiredVelocity = GetMaxSpeed() * desiredDir.normalized;
+                desiredVelocity = GetMaxSpeed(desiredDir) * desiredDir.normalized;
             }
 
             Vector3 xzVelocity = mRigidbody.velocity;
@@ -166,12 +166,14 @@ public class Character : MonoBehaviour
     }
 
     // Cat and Player can override this
-    protected virtual float GetMaxSpeed()
+    // Cat does so to have different per-emotion speeds
+    // Player does so for towards-bun and away-from-cat modifiers
+    protected virtual float GetMaxSpeed(Vector2 inDirection)
     {
         return mEmotion.GetMaxSpeed();
     }
 
-    private float GetAccel()
+    protected float GetAccel()
     {
         return normalMoveAccel * mEmotion.GetAccelModifier();
     }
