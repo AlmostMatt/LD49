@@ -111,6 +111,8 @@ public class LevelManager : MonoBehaviour
 
     private void GoToLevelInternal(string name, float delay)
     {
+        if (mSceneLoadState != SceneLoadState.SLS_LOADED) return;
+
         Debug.Log("Fading to black");
         HUDControl.FadeToBlack();
         mPendingLevel = name;
