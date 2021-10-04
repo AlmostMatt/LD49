@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/BunJump.unity
     guid: eb63ee08a0982c14c8e087f88c300c86
+  - enabled: 1
+    path: Assets/Scenes/Levels/FearCat.unity
+    guid: e4861a20c6741064f8f1724f5c16c0ec
   m_configObjects: {}

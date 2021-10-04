@@ -178,6 +178,12 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // TESTING ONLYYY
+        if (Input.GetButtonDown("Jump"))
+        {
+            LevelFinished();
+        }
+
         if (mSceneLoadState == SceneLoadState.SLS_NEXT_SCENE_PENDING)
         {
             mNextLevelTimer -= Time.deltaTime;
