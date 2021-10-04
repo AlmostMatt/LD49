@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/AngrySmash.unity
     guid: 96cc485fc1cb6db459a535a01f3bd508
+  - enabled: 1
+    path: Assets/Scenes/Levels/AngryChase.unity
+    guid: cd16c913be030c149a1dd6d22d0c33aa
   m_configObjects: {}
