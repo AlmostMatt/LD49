@@ -46,6 +46,8 @@ public static class EmotionExtensions
                 return "JoyfulEnvFx";
             case Emotion.ANGRY:
                 return "AngryEnvFx";
+            case Emotion.SMITTEN:
+                return "SmittenEnvFx";
             default:
                 return null;
         }
