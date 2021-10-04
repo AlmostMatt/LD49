@@ -412,6 +412,7 @@ public class Player : Character
         if (mEmotion != Emotion.ANGRY) return;
 
         Camera camera = Camera.main;
+        SFXPlayer.PlayAudioClip("stomp");
         CameraShake shake = camera.gameObject.GetComponent<CameraShake>();
         StartCoroutine(shake.Shake(0.15f, 0.025f));
     }

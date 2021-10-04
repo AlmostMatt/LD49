@@ -99,12 +99,12 @@ public class Cat : Character
             }
             else
             {
-                Debug.LogWarning(path.status);
+                //Debug.LogWarning(path.status);
             }
         }
         else
         {
-            Debug.LogWarning("No nearby ground for Cat movement target.");
+            //Debug.LogWarning("No nearby ground for Cat movement target.");
         }
         return null;
     }
@@ -130,6 +130,10 @@ public class Cat : Character
                     bestPathLength = pathLen;
                 }
             }
+        }
+        if (bestPath == null)
+        {
+            Debug.LogWarning("Scaredy cat has nowhere to run.");
         }
         return bestPath;
     }
