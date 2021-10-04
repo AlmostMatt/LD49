@@ -9,7 +9,7 @@ TagManager:
   - AfraidEnvFx
   - SmittenEnvFx
   - LevelManager
-  - NeutralEnvFX
+  - NeutralEnvFx
   layers:
   - Default
   - TransparentFX
