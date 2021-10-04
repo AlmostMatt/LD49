@@ -7,7 +7,9 @@ public class Player : Character
     private float foodVisionRadius = 3f;
     private float angryCatVisionRadius = 1.5f;
     // Player jumps when joyful
-    public float happyJumpTimer = 1f;
+    public float happyJumpTimer = 1f; // This is effectively the jump cooldown
+    private const float JUMP_QUEUED_INPUT_TIME = 0.25f; // How long before input is forgotten
+    private const float JUMP_MIDAIR_TURN_GRACE_TIME = 0.15f; // How long after jumping to still allow input
     public float skipHeightMultiplier = 0.5f;
     private float mJumpCooldown = 0f;
     private bool mAlternateFoot = false;
@@ -16,6 +18,13 @@ public class Player : Character
     private Vector2 mCurrentJumpDirection;
     private Vector3? mAttraction;
     private Vector3? mThreat;
+
+    // Timers to allow queued and delayed inputs when jumping.
+    private float mLastHInput = 0f;
+    private float mLastVInput = 0f;
+    private float mTimeSinceHInput = 0f;
+    private float mTimeSinceVInput = 0f;
+    private float mTimeSinceOnGround = 0f;
     
     public override void Update()
     {
@@ -158,13 +167,37 @@ public class Player : Character
         bool prevInAir = mInAir;
         base.FixedUpdate();
         CheckEmotionTriggers();
-        Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal") , Input.GetAxis("Vertical"));
+        Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        // Remember buffered inputs for queued jump inputs
+        if (inputVector.x != 0f)
+        {
+            mTimeSinceHInput = 0f;
+            mLastHInput = inputVector.x;
+        }
+        if (inputVector.y != 0f)
+        {
+            mTimeSinceVInput = 0f;
+            mLastVInput = inputVector.y;
+        }
         if (mEmotion != Emotion.JOYFUL)
         {
             DoDirectionalMovement(inputVector);
         }
         else if (mEmotion == Emotion.JOYFUL)
         {
+            // Construct a buffered input vector based on recent user input
+            Vector2 bufferedInputVector = Vector2.zero;
+            if (mTimeSinceHInput < JUMP_QUEUED_INPUT_TIME)
+            {
+                bufferedInputVector.x = mLastHInput;
+            }
+            if (mTimeSinceVInput < JUMP_QUEUED_INPUT_TIME)
+            {
+                bufferedInputVector.y = mLastVInput;
+            }
+            //Debug.Log(bufferedInputVector);
+            // Use the bufferred input vector if there is no current input, but there was input recently.
+
             if (prevInAir != mInAir && !mInAir)
             {
                 mJumpCooldown = happyJumpTimer;
@@ -180,9 +213,6 @@ public class Player : Character
                     Vector3 jumpForce = Vector3.up * jumpAccel * skipHeightMultiplier;
                     mRigidbody.velocity = Vector3.zero;
                     mRigidbody.AddForce(jumpForce);
-                    
-                    DoDirectionalMovement(inputVector, true);
-                    mCurrentJumpDirection = inputVector;
                 }
                 else
                 {
@@ -190,15 +220,23 @@ public class Player : Character
                     Vector3 jumpForce = Vector3.up * jumpAccel;
                     mRigidbody.velocity = Vector3.zero;
                     mRigidbody.AddForce(jumpForce);
-                    
-                    DoDirectionalMovement(inputVector, true);
-                    mCurrentJumpDirection = inputVector;
                 }
-                
+
+                mCurrentJumpDirection = inputVector;
+                if (inputVector.magnitude == 0)
+                {
+                    mCurrentJumpDirection = bufferedInputVector;
+                }
+                DoDirectionalMovement(mCurrentJumpDirection, true);
                 mAlternateFoot = !mAlternateFoot;
             }
             else if (mInAir)
             {
+                // Allow change of direction for a small amount of time
+                if (inputVector.magnitude > 0f && mTimeSinceOnGround < JUMP_MIDAIR_TURN_GRACE_TIME)
+                {
+                    mCurrentJumpDirection = inputVector;
+                }
                 // make it so that we can jump onto a block that's right beside us
                 DoDirectionalMovement(mCurrentJumpDirection, true);
             }
@@ -241,6 +279,16 @@ public class Player : Character
             float newSpeed = v.magnitude;
             mRigidbody.velocity = new Vector3(v.x, mRigidbody.velocity.y, v.y);
             // Debug.Log("Capping speed. Was " + oldSpeed + ", now " + newSpeed);
+        }
+        // Update timers for buffered and delayed inputs
+        mTimeSinceHInput += Time.fixedDeltaTime;
+        mTimeSinceVInput += Time.fixedDeltaTime;
+        if (mInAir)
+        {
+            mTimeSinceOnGround += Time.fixedDeltaTime;
+        } else
+        {
+            mTimeSinceOnGround = 0f;
         }
     }
 
