@@ -220,8 +220,11 @@ public class Character : MonoBehaviour
     public T ObjectInRangeOrNull<T>(float radius) where T : MonoBehaviour
     {
         T closestT = null;
-        foreach (Collider other in Physics.OverlapSphere(
-            transform.position, radius, LayerMask.GetMask(OBJECT_IN_RANGE_LAYERS), QueryTriggerInteraction.Collide))
+        // Use Capsule to effectively ignore height
+        Vector3 belowSelf = transform.position + new Vector3(0f, -10f, 0f);
+        Vector3 aboveSelf = transform.position + new Vector3(0f, +10f, 0f);
+        foreach (Collider other in Physics.OverlapCapsule(
+            belowSelf, aboveSelf, radius, LayerMask.GetMask(OBJECT_IN_RANGE_LAYERS), QueryTriggerInteraction.Collide))
         {
             T otherT = other.GetComponent<T>();
             if (otherT != null)
