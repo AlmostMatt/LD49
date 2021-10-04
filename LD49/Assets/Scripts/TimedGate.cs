@@ -15,6 +15,7 @@ public class TimedGate : MonoBehaviour
     private float mStayOpenTimer = 0f;
     private float mOpenAmount = 0f;
     private float mOpenSpeed = 0f;
+    private bool mReceivedCloseTrigger = false;
     private BoxCollider mGateCollider;
     private int mGateCollisionMask;
 
@@ -33,7 +34,7 @@ public class TimedGate : MonoBehaviour
             {
                 mStayOpenTimer -= Time.fixedDeltaTime;
             }
-            else
+            else if (mReceivedCloseTrigger)
             {
                 Close();
             }
@@ -74,6 +75,8 @@ public class TimedGate : MonoBehaviour
     void OnTriggerButtonPressed()
     {
         Open();
+
+        mReceivedCloseTrigger = false;
     }
 
     void OnTriggerButtonReleased()
@@ -83,6 +86,7 @@ public class TimedGate : MonoBehaviour
             Close();
         }
 
+        mReceivedCloseTrigger = true;
         // if not interruptible, once it's open, the timer should immediately start anyway
     }
 
