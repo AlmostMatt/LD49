@@ -68,6 +68,7 @@ public class Character : MonoBehaviour
         foreach(RaycastHit hitInfo in onGroundHits)
         {
             if (hitInfo.collider.gameObject == gameObject) continue;
+            if (hitInfo.distance == 0f) continue; // sweep started inside whatever we hit; shouldn't happen for actual ground, since the sweep should start well above it
 
             if (Vector3.Dot(hitInfo.normal, Vector3.up) > 0.3f) // don't count as on ground unless the collision is flat enough
             {
