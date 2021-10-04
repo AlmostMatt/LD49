@@ -196,11 +196,6 @@ public class Character : MonoBehaviour
     {
         if (!initial)
         {
-            if (mEmotionChangeCooldownTimer > 0f && e != Emotion.JOYFUL) // can't really delay picking up a bun, so joy bypasses cooldown
-            {
-                return;
-            }
-
             mEmotionChangeCooldownTimer = emotionChangeCooldown;
         }
 
@@ -214,6 +209,11 @@ public class Character : MonoBehaviour
     public Emotion GetEmotion()
     {
         return mEmotion;
+    }
+
+    protected bool EmotionChangeOnCooldown()
+    {
+        return mEmotionChangeCooldownTimer > 0f;
     }
 
     // This can be used to find nearby cats, players, or meatbuns

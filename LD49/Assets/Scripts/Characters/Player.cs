@@ -36,6 +36,11 @@ public class Player : Character
 
     private void CheckEmotionTriggers()
     {
+        if (EmotionChangeOnCooldown())
+        {
+            return;
+        }
+        
         // Reset attractions and threats.
         mAttraction = null;
         mThreat = null;
@@ -54,12 +59,20 @@ public class Player : Character
             bool catHasFood = nearbyFood.transform.parent != null;
             if (catHasFood)
             {
-                SetEmotion(Emotion.ANGRY);
+                if (GetEmotion() != Emotion.ANGRY)
+                {
+                    SetEmotion(Emotion.ANGRY);
+                }
+                
                 mAttraction = nearbyFood.transform.parent.position;
             }
             else
             {
-                SetEmotion(Emotion.SMITTEN);
+                if (GetEmotion() != Emotion.SMITTEN)
+                {
+                    SetEmotion(Emotion.SMITTEN);
+                }
+
                 mAttraction = nearbyFood.transform.position;
             }
         }
