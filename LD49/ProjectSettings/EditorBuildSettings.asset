@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/AngryChase.unity
     guid: cd16c913be030c149a1dd6d22d0c33aa
+  - enabled: 1
+    path: Assets/Scenes/Levels/BunHeaven.unity
+    guid: c0ed07372fd466d418cd76b466e86056
   m_configObjects: {}
