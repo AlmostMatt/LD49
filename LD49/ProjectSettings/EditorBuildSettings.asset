@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/FearCat.unity
     guid: e4861a20c6741064f8f1724f5c16c0ec
+  - enabled: 1
+    path: Assets/Scenes/Levels/FastFear.unity
+    guid: 9a261902af628e046876dbf799f0034b
   m_configObjects: {}
