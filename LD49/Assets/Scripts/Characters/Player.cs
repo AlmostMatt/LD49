@@ -275,6 +275,14 @@ public class Player : Character
             // Slow down when running towards dangerous cat.
             // Max speed of 0f towards the cat at a 
         **/
+
+        if (mEmotion == Emotion.JOYFUL && mAlternateFoot)
+        {
+            // skipping. slow down a bit so that we cover approx. 1m
+            // (skipping code says alternate foot is jump, so somehow this must get called *after* the alternate foot changes?! don't understand that though)
+            baseSpeed *= 0.62f;
+        }
+
         return baseSpeed;
     }
 
