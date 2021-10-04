@@ -198,6 +198,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: JoyfulEnvFx
       objectReference: {fileID: 0}
+    - target: {fileID: 6636851763260688543, guid: 9ecd1e68ea754d3409095cc18b8f1e91,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ecd1e68ea754d3409095cc18b8f1e91, type: 3}
 --- !u!4 &6837763336827310999 stripped

@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 5831377766854626304}
   - component: {fileID: 151821040689561157}
   - component: {fileID: 2798493331574570253}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: front (vines)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 8468902116292490214}
   - component: {fileID: 501216465807508732}
   - component: {fileID: 1291091779370583354}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: front (vines)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -828,7 +828,7 @@ GameObject:
   - component: {fileID: 128977304525997579}
   - component: {fileID: 4738624536197129868}
   - component: {fileID: 1991062209047399846}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: front (vines)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
