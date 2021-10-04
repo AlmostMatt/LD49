@@ -160,11 +160,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea944a2ba588884c98860fca5b1148c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emotionChangeCooldown: 1
   normalMoveMaxSpeed: 3
   normalMoveAccel: 50
   jumpAccel: 250
   horizontalFlipGroup: {fileID: 0}
-  mEmotion: 0
+  mEmotion: 4
   happyJumpTimer: 0.1
   skipHeightMultiplier: 0.6
 --- !u!54 &6686201163283154106
