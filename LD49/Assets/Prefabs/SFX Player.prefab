@@ -157,5 +157,5 @@ MonoBehaviour:
   - name: angry_voice
     AudioClip: {fileID: 8300000, guid: ac957a35dd479ac449dcf9f276846c47, type: 3}
   - name: smitten_voice
-    AudioClip: {fileID: 8300000, guid: e7be2e6e96118614e8449d8479c5dba1, type: 3}
+    AudioClip: {fileID: 8300000, guid: 217c4c8c027da0c4797018457f97916e, type: 3}
   namedAudioClips3: []
