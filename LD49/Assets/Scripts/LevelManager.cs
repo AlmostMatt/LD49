@@ -181,10 +181,10 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         // TESTING ONLYYY
-        if (Input.GetButtonDown("Jump"))
-        {
-            LevelFinished();
-        }
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    LevelFinished();
+        //}
 
         if (mSceneLoadState == SceneLoadState.SLS_NEXT_SCENE_PENDING)
         {
