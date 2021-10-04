@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/BunHeaven.unity
     guid: c0ed07372fd466d418cd76b466e86056
+  - enabled: 1
+    path: Assets/Scenes/Levels/LearnToJump.unity
+    guid: b8c095bf7ef11464595fbec25420b955
   m_configObjects: {}
