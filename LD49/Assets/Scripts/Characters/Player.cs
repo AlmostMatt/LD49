@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Player : Character
 {
-    public float visionRadius = 3f;
+    private float foodVisionRadius = 3f;
+    private float angryCatVisionRadius = 1.5f;
     // Player jumps when joyful
     public float happyJumpTimer = 1f;
     public float skipHeightMultiplier = 0.5f;
@@ -33,8 +34,8 @@ public class Player : Character
         // Reset attractions and threats.
         mAttraction = null;
         mThreat = null;
-        Cat nearbyCat = ObjectInRangeOrNull<Cat>(visionRadius);
-        Food nearbyFood = ObjectInRangeOrNull<Food>(visionRadius);
+        Cat nearbyCat = ObjectInRangeOrNull<Cat>(angryCatVisionRadius);
+        Food nearbyFood = ObjectInRangeOrNull<Food>(foodVisionRadius);
         // Angry cat - be afraid!
         if (nearbyCat != null && nearbyCat.GetEmotion() == Emotion.ANGRY)
         {
@@ -167,7 +168,8 @@ public class Player : Character
             // Afraid of cat
             // At a distance of 0, push player away equal to their accel
             // At a distance of visionRadius, do not push at all (0)
-            float repulsionFromDistance = Mathf.Max(0f, visionRadius - threatDistance) / visionRadius;
+            float angryCatRepulsionRadius = 3f;
+            float repulsionFromDistance = Mathf.Max(0f, angryCatRepulsionRadius - threatDistance) / angryCatRepulsionRadius;
             float repulsionAmount = 1f * threatStrength * repulsionFromDistance;
             mRigidbody.AddForce(repulsionAmount * GetAccel() * awayFromThreat.normalized);
         }
@@ -182,7 +184,7 @@ public class Player : Character
             {
                 // At a distance of 0, pull player away equal to 2x their accel
                 // At a distance of visionRadius, do not pull at all (0)
-                float attrFromDistance = Mathf.Max(0f, visionRadius - attractionDistance) / visionRadius;
+                float attrFromDistance = Mathf.Max(0f, foodVisionRadius - attractionDistance) / foodVisionRadius;
                 float attrAmount = 2f * attractionStrength * attrFromDistance;
                 mRigidbody.AddForce(attrAmount * GetAccel() * towardAttraction.normalized);
             }

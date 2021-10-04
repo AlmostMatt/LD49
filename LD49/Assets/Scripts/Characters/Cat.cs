@@ -276,6 +276,6 @@ public class Cat : Character
     protected override float GetMaxSpeed(Vector2 inDirection)
     {
         // TODO - maybe make cat speed vary based on emotion.
-        return 3f;
+        return 2f;
     }
 }
