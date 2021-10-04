@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 598265614}
   m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,7 +165,6 @@ MonoBehaviour:
   jumpAccel: 250
   horizontalFlipGroup: {fileID: 0}
   mEmotion: 0
-  visionRadius: 3
   happyJumpTimer: 0.1
   skipHeightMultiplier: 0.6
 --- !u!54 &6686201163283154106

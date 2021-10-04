@@ -75,8 +75,22 @@ public class Player : Character
         }
     }
 
+    // Return position of nearest food (or null if no food)
+    public Vector3? GetSmittenTargetForFocus()
+    {
+        if (GetEmotion() == Emotion.SMITTEN)
+        {
+            Food nearbyFood = ObjectInRangeOrNull<Food>(100f);
+            if (nearbyFood != null)
+            {
+                return nearbyFood.transform.position;
+            }
+        }
+        return null;
+    }
+
     // Returns a value between 0f and 1f based on proximity to attractor
-    private float GetAttractionStrength()
+    public float GetAttractionStrength(float minForceIfSmitten = 0.25f)
     {
         if (!mAttraction.HasValue)
         {
@@ -91,7 +105,7 @@ public class Player : Character
             float minDist = 0.5f;
             float maxDist = foodVisionRadius;
             if (deltaDistance > maxDist) { return 0f;  }
-            float minForce = 0.25f;
+            float minForce = minForceIfSmitten;
             return minForce + (1-minForce)*(Mathf.Max(minDist, maxDist - deltaDistance) - minDist) / (maxDist - minDist);
         } else if (GetEmotion() == Emotion.ANGRY)
         {
