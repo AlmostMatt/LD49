@@ -21,7 +21,7 @@ public class TimedGate : MonoBehaviour
     void Start()
     {
         mGate = transform.Find("Gate");
-        mGateCollider = mGate.GetComponent<BoxCollider>();
+        mGateCollider = mGate.GetComponentInChildren<BoxCollider>();
         mGateCollisionMask = LayerMask.GetMask("Player", "Cat", "Bun");
     }
 
