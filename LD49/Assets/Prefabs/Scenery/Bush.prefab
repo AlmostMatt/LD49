@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c52cfc88a858c4b46855fddeb52b8bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  break_sound: break_plant
 --- !u!1 &6474951967964508929
 GameObject:
   m_ObjectHideFlags: 0
