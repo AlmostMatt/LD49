@@ -40,7 +40,7 @@ public class Player : Character
         {
             return;
         }
-        
+
         // Reset attractions and threats.
         mAttraction = null;
         mThreat = null;
@@ -53,7 +53,7 @@ public class Player : Character
             mThreat = nearbyCat.transform.position;
         }
         // Ignore food if already joyful. Maybe change this to allow smitten or angry for more food.
-        else if (nearbyFood != null && GetEmotion() != Emotion.JOYFUL)
+        else if (nearbyFood != null /*&& GetEmotion() != Emotion.JOYFUL*/)
         {
             // The food is the child of the cat while the cat is carrying it
             bool catHasFood = nearbyFood.transform.parent != null;
@@ -168,6 +168,7 @@ public class Player : Character
             if (prevInAir != mInAir && !mInAir)
             {
                 mJumpCooldown = happyJumpTimer;
+                mRigidbody.velocity = Vector3.zero;
             }
 
             // totally different movement if happy and jumping
@@ -293,7 +294,7 @@ public class Player : Character
         {
             // skipping. slow down a bit so that we cover approx. 1m
             // (skipping code says alternate foot is jump, so somehow this must get called *after* the alternate foot changes?! don't understand that though)
-            baseSpeed *= 0.62f;
+            baseSpeed *= 0.8f;
         }
 
         return baseSpeed;
