@@ -49,4 +49,5 @@ MonoBehaviour:
   - BunJump
   - AvoidBuns
   - FearCat
+  - FastFear
   - AngryDueToCat
