@@ -760,7 +760,7 @@ PrefabInstance:
     - target: {fileID: 6686201163283154087, guid: 4945387d2516a224c9141421096aceac,
         type: 3}
       propertyPath: mEmotion
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6686201163283154107, guid: 4945387d2516a224c9141421096aceac,
         type: 3}
