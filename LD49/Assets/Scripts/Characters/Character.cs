@@ -184,7 +184,7 @@ public class Character : MonoBehaviour
         mFacingDirection = newDir;
     }
 
-    public virtual void SetEmotion(Emotion e)
+    public virtual void SetEmotion(Emotion e, bool initial = false)
     {
         mEmotion = e;
         foreach (EmotionEffect effect in GetComponentsInChildren<EmotionEffect>())

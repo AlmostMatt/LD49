@@ -27,6 +27,11 @@ public class Player : Character
         }
 
         mAnimator.SetBool("AlternateFoot", mAlternateFoot);
+
+        if (mMoodEnvironmentEffects == null)
+        {
+            SetEmotion(mEmotion, true); // doesn't work in Start for some reason (wrong finds the wrong gameObject by tag?)
+        }
     }
 
     private void CheckEmotionTriggers()
@@ -274,7 +279,7 @@ public class Player : Character
     }
 
     // Note that this method can trigger repeatedly, even if this is already the current emotion.
-    public override void SetEmotion(Emotion e)
+    public override void SetEmotion(Emotion e, bool initial = false)
     {
         base.SetEmotion(e);
         if (mEmotion == Emotion.JOYFUL)
@@ -283,8 +288,11 @@ public class Player : Character
             mAlternateFoot = false;
         }
 
-        // trigger scripted level events, if any
-        ScriptedLevelEvents.Trigger(mEmotion);
+        if (!initial)
+        {
+            // trigger scripted level events, if any (but not if this is the emotion we started the level with)
+            ScriptedLevelEvents.Trigger(mEmotion);
+        }
 
         // environmental vfx
         GameObject newMoodEnvEffects = null;
