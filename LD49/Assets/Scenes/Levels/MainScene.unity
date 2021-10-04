@@ -158,13 +158,68 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7293451168839104191, guid: d0d8611aa0e035249a704915cb116b7d,
         type: 3}
+      propertyPath: clips.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293451168839104191, guid: d0d8611aa0e035249a704915cb116b7d,
+        type: 3}
       propertyPath: volumes.Array.size
-      value: 1
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293451168839104191, guid: d0d8611aa0e035249a704915cb116b7d,
+        type: 3}
+      propertyPath: clips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 73d96705c039f0340a59217ec5b8c65d, type: 3}
+    - target: {fileID: 7293451168839104191, guid: d0d8611aa0e035249a704915cb116b7d,
+        type: 3}
+      propertyPath: clips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: bdd4dbb49a7d77e4eb81a3bc1294e3f7, type: 3}
+    - target: {fileID: 7293451168839104191, guid: d0d8611aa0e035249a704915cb116b7d,
+        type: 3}
+      propertyPath: clips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3fe1a49d3116dea47a1e1afd49194c8c, type: 3}
+    - target: {fileID: 7293451168839104191, guid: d0d8611aa0e035249a704915cb116b7d,
+        type: 3}
+      propertyPath: clipNames.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7293451168839104191, guid: d0d8611aa0e035249a704915cb116b7d,
         type: 3}
       propertyPath: volumes.Array.data[0]
-      value: 0.2
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293451168839104191, guid: d0d8611aa0e035249a704915cb116b7d,
+        type: 3}
+      propertyPath: volumes.Array.data[1]
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293451168839104191, guid: d0d8611aa0e035249a704915cb116b7d,
+        type: 3}
+      propertyPath: volumes.Array.data[2]
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293451168839104191, guid: d0d8611aa0e035249a704915cb116b7d,
+        type: 3}
+      propertyPath: volumes.Array.data[3]
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293451168839104191, guid: d0d8611aa0e035249a704915cb116b7d,
+        type: 3}
+      propertyPath: clipNames.Array.data[1]
+      value: JoyTheme
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293451168839104191, guid: d0d8611aa0e035249a704915cb116b7d,
+        type: 3}
+      propertyPath: clipNames.Array.data[2]
+      value: FearTheme
+      objectReference: {fileID: 0}
+    - target: {fileID: 7293451168839104191, guid: d0d8611aa0e035249a704915cb116b7d,
+        type: 3}
+      propertyPath: clipNames.Array.data[3]
+      value: SmittenTheme
       objectReference: {fileID: 0}
     - target: {fileID: 7886009085894385208, guid: d0d8611aa0e035249a704915cb116b7d,
         type: 3}
