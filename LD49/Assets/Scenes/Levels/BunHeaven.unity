@@ -10828,6 +10828,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3848808400316934236, guid: bfb4bfa5011c52844b96ad60775bcb3b,
+        type: 3}
+      propertyPath: generateAtRuntime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3848808400908962918, guid: bfb4bfa5011c52844b96ad60775bcb3b,
+        type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 8d2de35b721008546bcaa38694c4a9cf,
+        type: 2}
     - target: {fileID: 4290271653545409985, guid: bfb4bfa5011c52844b96ad60775bcb3b,
         type: 3}
       propertyPath: m_RootOrder

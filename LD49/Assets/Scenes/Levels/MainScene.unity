@@ -522,11 +522,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 348227369318072990, guid: 8ea0a575e049fd94db477b2c80fe5636,
+        type: 3}
+      propertyPath: generateAtRuntime
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 348227370580715907, guid: 8ea0a575e049fd94db477b2c80fe5636,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 348227370850461348, guid: 8ea0a575e049fd94db477b2c80fe5636,
+        type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 74cf8f8c71e462740a183335d9b8f13d,
+        type: 2}
     - target: {fileID: 1535558424849406280, guid: 8ea0a575e049fd94db477b2c80fe5636,
         type: 3}
       propertyPath: m_Name
